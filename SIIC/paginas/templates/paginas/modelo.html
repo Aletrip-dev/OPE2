@@ -25,6 +25,7 @@
 
     </head>
 
+<!--Corpo da página-->
     <body>
     {% block titutol_pagina %}
         <h1 align="center">PÁGINA MODELO</h1>
@@ -32,7 +33,7 @@
 
     {% block menu %}
     <!-- Menu de navegação-->
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar  navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
         <a class="navbar-brand" href="#">Menu</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -40,13 +41,19 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Página1</a>
+                <a class="nav-link" href="{% url 'inicio' %}">Página inicial</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Página2</a>
+                <a class="nav-link" href="#">Cadastros</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="#">Relatórios</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="#">Estoque</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Página3</a>
+                <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
             </li>    
             </ul>
         </div>  

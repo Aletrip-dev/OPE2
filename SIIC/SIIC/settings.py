@@ -26,7 +26,7 @@ SECRET_KEY = 'n=4wn6bffd-ak+4^tv@^e30yo41su5+uoi6d3+7w*syqblo=s)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'paginas.apps.PaginasConfig',
+    'cadastros.apps.CadastrosConfig',
     # nomedoapp.apps.Nomedoappconfig
 ]
 

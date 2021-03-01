@@ -8,5 +8,3 @@ class IndexView(TemplateView):
 
 class SobreView(TemplateView):
     template_name = "paginas/sobre.html"
-
-    
