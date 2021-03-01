@@ -26,3 +26,5 @@ class Atividade(models.Model):
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
         return "{}, ({})".format(self.nome, self.campo)
+
+# teste git
