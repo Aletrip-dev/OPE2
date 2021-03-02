@@ -11,6 +11,7 @@ class Usuario(models.Model):
     nome_usuario = models.CharField(max_length=150)
     funcao_usuario = models.CharField(max_length=50, verbose_name="Função")
     nivel_usuario = models.CharField(max_length=50, verbose_name="Nível")
+    senha_usuario = models.CharField(max_length=50, verbose_name="Senha")
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
