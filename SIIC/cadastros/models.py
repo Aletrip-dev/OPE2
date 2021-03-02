@@ -7,26 +7,25 @@ from django.db import models
 # cada classe representa uma tabela na base de dados
 
 
-class Campo(models.Model):
-    nome = models.CharField(max_length=50)
-    descricao = models.CharField(max_length=150, verbose_name="Descricão")
+class Usuario(models.Model):
+    nome_usuario = models.CharField(max_length=150)
+    funcao_usuario = models.CharField(max_length=50, verbose_name="Função")
+    nivel_usuario = models.CharField(max_length=50, verbose_name="Nível")
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
-        return "{}, ({})".format(self.nome, self.descricao)
+        return "{} - Função: {} - (Nível {})".format(self.nome_usuario, self.funcao_usuario, self.nivel_usuario)
 
 
-class Atividade(models.Model):
-    numero = models.IntegerField(verbose_name="Número")
-    descricao = models.CharField(max_length=150, verbose_name="Descricão")
-    pontos = models.DecimalField(decimal_places=1, max_digits=4)
-    detalhes = models.CharField(max_length=100)
+class Pedido(models.Model):
+    valor_pedido = models.DecimalField(decimal_places=2, max_digits=6)
+    data_pedido = models.DateField(auto_now=True)
     # chave estrangeira protegida quando há dependências
-    campo = models.ForeignKey(Campo, on_delete=models.PROTECT)
+    usuario_pedido = models.ForeignKey(Usuario, on_delete=models.PROTECT)
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
-        return "{} - {}, ({})".format(self.numero, self.descricao, self.campo)
+        return "Resposável: {}, em: {} --> Total do pedido: R$ {}".format(self.usuario_pedido, self.data_pedido, self.valor_pedido)
 
 # inclusão de classes especificas para as tabelas relacionais
 # conforme diagrama de classes

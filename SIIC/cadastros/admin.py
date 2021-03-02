@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import Campo, Atividade
-
+from .models import Usuario, Pedido
 
 # Register your models here.
 
 
-admin.site.register(Campo)
-admin.site.register(Atividade)
+admin.site.register(Usuario)
+admin.site.register(Pedido)
