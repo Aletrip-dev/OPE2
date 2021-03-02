@@ -1,0 +1,28 @@
+{% extends 'paginas/modelo.html' %}
+{% load static %}
+
+{% block titulo %}
+    <title>Cadastros</title>
+{% endblock titulo %}
+
+
+{% block titulo_pagina %}
+    <h1 align=center >CADASTROS</h1>
+{% endblock titulo_pagina %}
+
+
+{% block conteudo %}
+<h3>Cadastrar</h3>
+<div class="jumbotron jumbotron-fluid bg-light">
+    <H4 class="container"align=center>Cadastros diversos</H4>
+    <p class="lead" align=center>Preencha todos os campos</p>
+    <hr>
+        <form class="container" action="" method="POST">
+            {% csrf_token %} <!--autenticador-->
+            {{form.as_p}} <!--formulário exibido como parágrafo-->
+            <button type="submit">Cadastar</button>
+        </form>
+    <hr>
+</div>
+
+{% endblock conteudo %}

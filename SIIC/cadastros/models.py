@@ -26,7 +26,10 @@ class Pedido(models.Model):
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
-        return "Resposável: {}, em: {} --> Total do pedido: R$ {}".format(self.usuario_pedido, self.data_pedido, self.valor_pedido)
+        return "User: {}, Dt: {} --> Total: R$ {}".format(self.usuario_pedido, self.data_pedido, self.valor_pedido)
+
 
 # inclusão de classes especificas para as tabelas relacionais
 # conforme diagrama de classes
+
+
