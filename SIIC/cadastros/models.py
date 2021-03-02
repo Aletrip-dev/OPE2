@@ -4,6 +4,7 @@ from django.db import models
 
 # classe que define os atributos dos campos
 # conforme o atributo da classe também valida os campos
+# cada classe representa uma tabela na base de dados
 
 
 class Campo(models.Model):
@@ -25,6 +26,7 @@ class Atividade(models.Model):
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
-        return "{}, ({})".format(self.nome, self.campo)
+        return "{} - {}, ({})".format(self.numero, self.descricao, self.campo)
 
-# teste git
+# inclusão de classes especificas para as tabelas relacionais
+# conforme diagrama de classes
