@@ -31,4 +31,3 @@ class Pedido(models.Model):
 
 # inclusão de classes especificas para as tabelas relacionais
 # conforme diagrama de classes
-
