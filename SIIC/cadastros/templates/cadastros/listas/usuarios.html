@@ -10,14 +10,15 @@
 {% block conteudo %}
 
 <p align=center>
-LISTA DE PEDIDOS
+LISTA DE USUÁRIOS
 </p>
 
 <div class="container">
+    <hr>
     <div class="table-responsive">
         <table class="table table-striped">
             <tr>
-                <th>ID</th>
+                <th>ID User</th>
                 <th>Nome</th>
                 <th>Função</th>
                 <th>Nível</th>
@@ -31,11 +32,8 @@ LISTA DE PEDIDOS
                     <td>{{Usuario.nome_usuario}}</td>
                     <td>{{Usuario.funcao_usuario}}</td>
                     <td>{{Usuario.nivel_usuario}}</td>
-
                     <td>
-                        <a href="{% url 'editar-usuario' Usuario.pk %}" class="btn btn-warning btn-sm" title="Editar">
-                            <i class="faS fa-user-times" aria-hiden="true"></i><
-                                /a>
+                        <a href="{% url 'editar-usuario' Usuario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-trash" aria-hidden="true">E</i></a>
                         <a href="{% url 'excluir-usuario' Usuario.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i class="fa fa-apple" aria-hidden="true">X</i></a>
                     </td>
                 </tr>
@@ -47,6 +45,7 @@ LISTA DE PEDIDOS
             {% endfor %}
 
         </table>
+    <hr>
     </div>
 </div>
 {% endblock conteudo %}

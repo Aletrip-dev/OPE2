@@ -12,12 +12,13 @@
 <p align=center>
 LISTA DE PEDIDOS
 </p>
-
+    
 <div class="container">
+    <hr>
     <div class="table-responsive">
         <table class="table table-striped">
             <tr>
-                <th>ID</th>
+                <th>ID Pedido</th>
                 <th>Usuario</th>
                 <th>Data</th>
                 <th>Valor do pedido</th>
@@ -31,11 +32,11 @@ LISTA DE PEDIDOS
                     <td>{{Pedido.usuario_pedido}}</td>
                     <td>{{Pedido.data_pedido}}</td>
                     <td>{{Pedido.valor_pedido}}</td>
-
                     <td>
-                        <a href="{% url 'editar-pedido' Pedido.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-apple" aria-hidden="true">E</i></a>
+                        <a href="{% url 'editar-pedido' Pedido.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-trash" aria-hidden="true">E</i></a>
                         <a href="{% url 'excluir-pedido' Pedido.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i class="fa fa-apple" aria-hidden="true">X</i></a>
                     </td>
+
                 </tr>
                 {% empty %}
                 <tr>
@@ -45,6 +46,7 @@ LISTA DE PEDIDOS
             {% endfor %}
 
         </table>
+    <hr>
     </div>
 </div>
 {% endblock conteudo %}

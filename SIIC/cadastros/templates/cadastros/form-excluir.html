@@ -1,5 +1,7 @@
 {% extends 'paginas/modelo.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block titulo %}
     <title>Cadastros</title>
@@ -22,7 +24,7 @@
             Deseja excluir o registro: <b>{{ object }}</b>?
             </p>
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy }}
             <button class="btn btn-danger" type="submit">Excluir</button>
         </form>
     <hr>
