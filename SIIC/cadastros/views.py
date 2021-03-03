@@ -22,7 +22,7 @@ class PedidoCreate(CreateView):
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-pedidos')
 
 
 # ##################################### UPDATE #################################
@@ -40,7 +40,7 @@ class PedidoUpdate(UpdateView):
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-pedidos')
 
 
 # ##################################### DELETE #################################
@@ -55,7 +55,7 @@ class UsuarioDelete(DeleteView):
 class PedidoDelete(DeleteView):
     model = Pedido
     template_name = 'cadastros/form-excluir.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-pedidos')
 
 
 # #########################LISTAR OBJETOS DE UM BANCO ##########################

@@ -2,6 +2,11 @@
 
 {% load static %}
 
+
+{% block titulo_pagina %}
+    <h1 align="center">LISTA DE PEDIDOS EFETUADOS</h1>
+{% endblock titulo_pagina %}
+
 {% block conteudo %}
 
 <p align=center>
@@ -29,7 +34,7 @@ LISTA DE PEDIDOS
 
                     <td>
                         <a href="{% url 'editar-pedido' Pedido.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-apple" aria-hidden="true">E</i></a>
-                        <a href="{% url 'editar-usuario' Pedido.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i class="fa fa-apple" aria-hidden="true">X</i></a>
+                        <a href="{% url 'excluir-pedido' Pedido.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i class="fa fa-apple" aria-hidden="true">X</i></a>
                     </td>
                 </tr>
                 {% empty %}
