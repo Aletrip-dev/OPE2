@@ -21,8 +21,8 @@
             <p>
             Deseja excluir o registro: <b>{{ object }}</b>?
             </p>
-            {% csrf_token %} <!--autenticador-->
-            {{ form.as_p }} <!--formulário exibido como parágrafo-->
+            {% csrf_token %}
+            {{ form.as_p }}
             <button class="btn btn-danger" type="submit">Excluir</button>
         </form>
     <hr>

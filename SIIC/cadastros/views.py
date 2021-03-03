@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
+from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from .models import Usuario, Pedido
 # Create your views here.
@@ -55,3 +56,16 @@ class PedidoDelete(DeleteView):
     model = Pedido
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('inicio')
+
+
+# #########################LISTAR OBJETOS DE UM BANCO ##########################
+
+
+class UsuarioList(ListView):
+    model = Usuario
+    template_name = 'cadastros/listas/usuarios.html'
+
+
+class PedidoList(ListView):
+    model = Pedido
+    template_name = 'cadastros/listas/pedidos.html'
