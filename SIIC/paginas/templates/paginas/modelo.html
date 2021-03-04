@@ -44,29 +44,27 @@
 
             <!--Dropdown CADASTROS-->
             </li>
-            <li class="nav-item dropdown">
-                <button class="btn btn-default dropdown-toggle text-light" type="button" id="menu1" data-toggle="dropdown">Cadastros
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu bg-dark text-light" role="menu" aria-labelledby="menu1">
-
-                    <li role="presentation"><a style="color: white;" role="menuitem" href="{% url 'cadastrar-usuario' %}">Usuários</a></li>
-                    <li role="presentation"><a style="color: white;" role="menuitem" href="{% url 'cadastrar-pedido' %}">Pedidos</a></li>
-
-                </ul>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
+                    Listas cadastradas
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'cadastrar-usuario' %}">Cadastro de usuários</a>
+                    <a class="dropdown-item" href="{% url 'cadastrar-pedido' %}">Cadastro de pedidos</a>
+                </div>
             </li>
 
 
             <!--Dropdown LISTAS-->
             </li>
-            <li class="nav-item dropdown">
-                <button class="btn btn-default dropdown-toggle text-light" type="button" id="menu2" data-toggle="dropdown">Listas
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu bg-dark text-light" role="menu" aria-labelledby="menu2">
-
-                    <li role="presentation"><a style="color: white;" role="menuitem" href="{% url 'listar-usuarios' %}">Usuários</a></li>
-                    <li role="presentation"><a style="color: white;" role="menuitem" href="{% url 'listar-pedidos' %}">Pedidos</a></li>
-
-                </ul>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
+                    Cadastros
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'listar-usuarios' %}">Lista de usuários</a>
+                    <a class="dropdown-item" href="{% url 'listar-pedidos' %}">Lista de pedidos</a>
+                </div>
             </li>
 
 

@@ -1,0 +1,12 @@
+> Python
+> Django
+> Crispy Forms
+> HTML5
+> CSS 
+> Bootstrap4
+> Fontawesome
+> Java Script
+> SSMS
+> Sqlite
+> Git
+> Github
