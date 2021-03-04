@@ -46,7 +46,7 @@
             </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
-                    Listas cadastradas
+                    Cadastros
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'cadastrar-usuario' %}">Cadastro de usuários</a>
@@ -59,7 +59,7 @@
             </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
-                    Cadastros
+                    Listas cadastradas
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'listar-usuarios' %}">Lista de usuários</a>
@@ -96,7 +96,8 @@
     {% endblock conteudo %}
 
     {% block rodape_nome %}
-        <div class ="bg-secondary text-center">
+
+        <div class ="bg-secondary text-center container-fluid">
             Rodape
         </div>
     {% endblock rodape_nome %}

@@ -8,7 +8,7 @@ from django.db import models
 
 
 class Usuario(models.Model):
-    nome_usuario = models.CharField(max_length=150)
+    nome_usuario = models.CharField(max_length=150, unique=True)
     funcao_usuario = models.CharField(max_length=50, verbose_name="Função")
     nivel_usuario = models.CharField(max_length=50, verbose_name="Nível")
     senha_usuario = models.CharField(max_length=50, verbose_name="Senha")
