@@ -16,14 +16,12 @@
     <H4 class="container"align=center>Cadastros diversos</H4>
     <p class="lead" align=center>Preencha todos os campos</p>
     <hr>
-        <form class="container" action="" method="POST">
+        <form class="container container-fluid" action="" method="POST">
             {% csrf_token %} <!--autenticador-->
             {{ form|crispy }} <!--formulário exibido como parágrafo-->
             <p align=right>*Campo com preenchimento obrigatório</p>
-
             <button class="btn btn-primary" type="submit">Cadastar</button>
         </form>
-        
     <hr>
 </div>
 {% endblock conteudo %}
