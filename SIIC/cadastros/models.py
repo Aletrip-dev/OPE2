@@ -29,5 +29,4 @@ class Pedido(models.Model):
         return "User: {}, Dt: {} --> Total: R$ {}".format(self.usuario_pedido, self.data_pedido, self.valor_pedido)
 
 
-# inclusão de classes especificas para as tabelas relacionais
 # conforme diagrama de classes
