@@ -15,19 +15,26 @@ class Usuario(models.Model):
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
-        return "{} - Função: {} - (Nível {})".format(self.nome_usuario, self.funcao_usuario, self.nivel_usuario)
+        return "{} - Função: {} - (Nível {})".format(
+            self.nome_usuario, self.funcao_usuario, self.nivel_usuario
+            )
 
 
 class Pedido(models.Model):
-    valor_pedido = models.DecimalField(decimal_places=2, max_digits=6)
+    valor_pedido = models.DecimalField(
+        decimal_places=2, max_digits=6, verbose_name="Valor do pedido"
+        )
     data_pedido = models.DateField(auto_now=True)
     # chave estrangeira protegida quando há dependências
-    usuario_pedido = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    usuario_pedido = models.ForeignKey(
+        Usuario, on_delete=models.PROTECT, verbose_name="Usuário responsável"
+        )
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
-        return "User: {}, Dt: {} --> Total: R$ {}".format(self.usuario_pedido, self.data_pedido, self.valor_pedido)
+        return "User: {}, Dt: {} --> Total: R$ {}".format(
+            self.usuario_pedido, self.data_pedido, self.valor_pedido
+            )
 
 
-# inclusão de classes especificas para as tabelas relacionais
 # conforme diagrama de classes

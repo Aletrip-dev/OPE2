@@ -4,13 +4,13 @@
 
 
 {% block titulo_pagina %}
-    <h1 align="center">LISTA DE USUÁRIOS CADASTRADOS</h1>
+<h1 align="center">LISTA DE USUÁRIOS CADASTRADOS</h1>
 {% endblock titulo_pagina %}
 
 {% block conteudo %}
 
-<p align=center>
-LISTA DE USUÁRIOS
+<p>
+    <h2 align=center>Lista de usuários cadastrados no SIIC</h2>
 </p>
 
 <div class="container">
@@ -27,25 +27,27 @@ LISTA DE USUÁRIOS
 
             {% for Usuario in object_list %}
 
-                <tr>
-                    <td>{{Usuario.pk}}</td>
-                    <td>{{Usuario.nome_usuario}}</td>
-                    <td>{{Usuario.funcao_usuario}}</td>
-                    <td>{{Usuario.nivel_usuario}}</td>
-                    <td>
-                        <a href="{% url 'editar-usuario' Usuario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-trash" aria-hidden="true">E</i></a>
-                        <a href="{% url 'excluir-usuario' Usuario.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i class="fa fa-apple" aria-hidden="true">X</i></a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">Nenhum campo registrado</td>
-                </tr>
+            <tr>
+                <td>{{Usuario.pk}}</td>
+                <td>{{Usuario.nome_usuario}}</td>
+                <td>{{Usuario.funcao_usuario}}</td>
+                <td>{{Usuario.nivel_usuario}}</td>
+                <td>
+                    <a href="{% url 'editar-usuario' Usuario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
+                            class="fas fa-edit" aria-hidden="true"></i></a>
+                    <a href="{% url 'excluir-usuario' Usuario.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i
+                            class="fas fa-trash-alt" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum campo registrado</td>
+            </tr>
 
             {% endfor %}
 
         </table>
-    <hr>
+        <hr>
     </div>
 </div>
 {% endblock conteudo %}
