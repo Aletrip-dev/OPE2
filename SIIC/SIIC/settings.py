@@ -146,3 +146,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+# DATABASE_CONNECTION_POOLING = False
