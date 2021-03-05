@@ -21,10 +21,14 @@ class Usuario(models.Model):
 
 
 class Pedido(models.Model):
-    valor_pedido = models.DecimalField(decimal_places=2, max_digits=6, verbose_name="Valor do pedido")
+    valor_pedido = models.DecimalField(
+        decimal_places=2, max_digits=6, verbose_name="Valor do pedido"
+        )
     data_pedido = models.DateField(auto_now=True)
     # chave estrangeira protegida quando há dependências
-    usuario_pedido = models.ForeignKey(Usuario, on_delete=models.PROTECT, verbose_name="Usuário responsável")
+    usuario_pedido = models.ForeignKey(
+        Usuario, on_delete=models.PROTECT, verbose_name="Usuário responsável"
+        )
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
