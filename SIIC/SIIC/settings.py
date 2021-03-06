@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Aplicações locais
     'paginas.apps.PaginasConfig',
     'cadastros.apps.CadastrosConfig',
+    'usuarios.apps.UsuariosConfig',
+
     'crispy_forms',
     # nomedoapp.apps.Nomedoappconfig
 ]
@@ -82,11 +86,27 @@ WSGI_APPLICATION = 'SIIC.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# CONNECTAR NO AZURE DATABASE
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'TESTE',
+        'USER': 'queen',
+        'PASSWORD': '@@Que2021',
+        'HOST': 'serverqueen.database.windows.net',
+        'PORT': '1433',
+
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
+    },
 }
 
 
@@ -130,3 +150,17 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+# DATABASE_CONNECTION_POOLING = False
+
+
+# CONFIGURAÇÕES DE AUTENTICAÇÃO
+
+# Redireciona usuário para a página pós login
+LOGIN_REDIRECT_URL = 'inicio'
+
+# Redireciona usuário caso não tenha acesso à págiuna
+LOGIN_URL = 'login'
+
+# Redireciona usuário para a página pós logout
+LOGOUT_REDIRECT_URL = 'login'

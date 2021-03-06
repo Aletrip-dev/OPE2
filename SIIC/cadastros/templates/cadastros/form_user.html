@@ -7,14 +7,11 @@
 {% endblock titulo %}
 
 
-{% block titulo_pagina %}
-    <h1 align=center >CADASTROS</h1>
-{% endblock titulo_pagina %}
 
 {% block conteudo %}
 <div class="jumbotron jumbotron-fluid bg-light">
-    <H4 class="container"align=center>Cadastros diversos</H4>
-    <p class="lead" align=center>Preencha todos os campos</p>
+    <H4 class="container"align=center>Cadastro de usuários</H4>
+    <p class="lead" align=center>Cadastro dos usuários do SIIC - Sistema Integrado de Inventário e Controle</p>
     <hr>
         <form class="container container-fluid" action="" method="POST">
             {% csrf_token %} <!--autenticador-->

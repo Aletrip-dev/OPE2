@@ -14,14 +14,14 @@ class UsuarioCreate(CreateView):
     model = Usuario
     fields = ['nome_usuario', 'funcao_usuario',
               'nivel_usuario', 'senha_usuario']
-    template_name = 'cadastros/form.html'
+    template_name = 'cadastros/form_user.html'
     success_url = reverse_lazy('inicio')
 
 
 class PedidoCreate(CreateView):
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
-    template_name = 'cadastros/form.html'
+    template_name = 'cadastros/form_pedidos.html'
     success_url = reverse_lazy('listar-pedidos')
 
 
@@ -32,14 +32,14 @@ class UsuarioUpdate(UpdateView):
     model = Usuario
     fields = ['nome_usuario', 'funcao_usuario',
               'nivel_usuario', 'senha_usuario']
-    template_name = 'cadastros/form.html'
+    template_name = 'cadastros/form_user.html'
     success_url = reverse_lazy('inicio')
 
 
 class PedidoUpdate(UpdateView):
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
-    template_name = 'cadastros/form.html'
+    template_name = 'cadastros/form_pedido.html'
     success_url = reverse_lazy('listar-pedidos')
 
 

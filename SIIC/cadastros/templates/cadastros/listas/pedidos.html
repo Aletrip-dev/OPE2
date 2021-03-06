@@ -4,15 +4,16 @@
 
 
 {% block titulo_pagina %}
-    <h1 align="center">LISTA DE PEDIDOS EFETUADOS</h1>
+<h1 align="center">LISTA DE PEDIDOS EFETUADOS</h1>
 {% endblock titulo_pagina %}
 
 {% block conteudo %}
 
-<p align=center>
-LISTA DE PEDIDOS
+<p>
+    <h2 align=center>Lista de pedidos realizados no SIIC</h2>
 </p>
-    
+
+
 <div class="container">
     <hr>
     <div class="table-responsive">
@@ -27,26 +28,28 @@ LISTA DE PEDIDOS
 
             {% for Pedido in object_list %}
 
-                <tr>
-                    <td>{{Pedido.pk}}</td>
-                    <td>{{Pedido.usuario_pedido}}</td>
-                    <td>{{Pedido.data_pedido}}</td>
-                    <td>{{Pedido.valor_pedido}}</td>
-                    <td>
-                        <a href="{% url 'editar-pedido' Pedido.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa fa-trash" aria-hidden="true">E</i></a>
-                        <a href="{% url 'excluir-pedido' Pedido.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i class="fa fa-apple" aria-hidden="true">X</i></a>
-                    </td>
+            <tr>
+                <td>{{Pedido.pk}}</td>
+                <td>{{Pedido.usuario_pedido}}</td>
+                <td>{{Pedido.data_pedido}}</td>
+                <td>{{Pedido.valor_pedido}}</td>
+                <td>
+                    <a href="{% url 'editar-pedido' Pedido.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
+                            class="fas fa-edit" aria-hidden="true"></i></a>
+                    <a href="{% url 'excluir-pedido' Pedido.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i
+                            class="fas fa-trash-alt" aria-hidden="true"></i></a>
+                </td>
 
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">Nenhum campo registrado</td>
-                </tr>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum campo registrado</td>
+            </tr>
 
             {% endfor %}
 
         </table>
-    <hr>
+        <hr>
     </div>
 </div>
 {% endblock conteudo %}
