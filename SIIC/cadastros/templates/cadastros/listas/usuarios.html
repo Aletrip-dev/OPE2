@@ -20,22 +20,20 @@
             <tr>
                 <th>ID User</th>
                 <th>Nome</th>
-                <th>Função</th>
-                <th>Nível</th>
+                <th>Email</th>
                 <th>Opcões</th>
             </tr>
 
-            {% for Usuario in object_list %}
+            {% for User in object_list %}
 
             <tr>
-                <td>{{Usuario.pk}}</td>
-                <td>{{Usuario.nome_usuario}}</td>
-                <td>{{Usuario.funcao_usuario}}</td>
-                <td>{{Usuario.nivel_usuario}}</td>
+                <td>{{User.pk}}</td>
+                <td>{{User.username}}</td>
+                <td>{{User.email}}</td>
                 <td>
-                    <a href="{% url 'editar-usuario' Usuario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
+                    <a href="{% url 'editar-usuario' User.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
                             class="fas fa-edit" aria-hidden="true"></i></a>
-                    <a href="{% url 'excluir-usuario' Usuario.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i
+                    <a href="{% url 'excluir-usuario' User.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i
                             class="fas fa-trash-alt" aria-hidden="true"></i></a>
                 </td>
             </tr>
