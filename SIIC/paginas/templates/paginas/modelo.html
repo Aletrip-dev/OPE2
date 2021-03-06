@@ -54,7 +54,6 @@
         }
     </style>
 
-
     <nav class="navbar  navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
         <a class="navbar-brand" href="#">Menu</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -62,10 +61,16 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
+
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'inicio' %}">Página inicial</a>
                     <!--Dropdown CADASTROS-->
                 </li>
+                {% else%}
+                {% endif%}
+
+                {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
                         Cadastros
@@ -75,7 +80,12 @@
                         <a class="dropdown-item" href="{% url 'cadastrar-pedido' %}">Cadastro de pedidos</a>
                     </div>
                 </li>
+                {% else %}
+                {% endif %}
+
                 <!--Dropdown LISTAS-->
+
+                {% if request.user.is_authenticated %}
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
@@ -86,12 +96,23 @@
                         <a class="dropdown-item" href="{% url 'listar-pedidos' %}">Lista de pedidos</a>
                     </div>
                 </li>
+                {% else %}
+                {% endif %}
+
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Relatórios</a>
                 </li>
+                {% else %}
+                {% endif %}
+
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Estoque</a>
                 </li>
+                {% else %}
+                {% endif%}
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
                 </li>
@@ -99,87 +120,113 @@
             </ul>
         </div>
 
-
         {% comment %} Usuário logago {% endcomment %}
+        {% if request.user.is_authenticated %}
         <ul class="nav navbar-nav navbar-right">
-
             <li class="nav-item" align-right>
                 <h3>
                     <i class="fas fa-user-alt" style="color:white"></i>
                 </h3 </li> <li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" style="padding-right: 30px">
                 <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
-                    Usuário
+                    <span id="username">{{ request.user }}</span>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'listar-usuarios' %}">Editar</a>
-                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                        <i class="fas fa-edit"></i>
+                        Editar</a>
+                    <hr>
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
                 </div>
             </li>
             </li>
         </ul>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login</a>
+            </li>
+        </ul>
+        {% endif %}
     </nav>
-
     {% endblock menu %}
 
-    {% block conteudo %}
+    {% if request.user.is_authenticated %}
     <!--Conteúdo da página-->
+    {% block conteudo %}
     <div class="bg-secondary text-center">
         Destaques da página
     </div>
-
     <div class="container container-fluid text-center">
         <p>
             Conteudo do site
         </p>
     </div>
     {% endblock conteudo %}
-
-    {% block rodape_nome %}
-    <div class="bg-secondary text-center container-fluid text-light">
-        Rodape
-    </div>
-    {% endblock rodape_nome %}
-
-    {% block rodape %}
-    <footer class="footer navbar-fixed-botton">
-        <div class="jumbotron jumbotron-fluid text-center">
-
-            <!--Alterar cor de fundo de uma classe bootstrap com css próprio-->
-            <style>
-                .jumbotron {
-                    background-color: #dddddd !important;
-                }
-            </style>
-            <!--Fim do script CSS-->
-
-            <div class="row">
-                <div class="col-sm-4 text-justify">
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                        <li>Aliquam tincidunt mauris eu risus.</li>
-                        <li>Vestibulum auctor dapibus neque.</li>
-                    </ul>
-                </div>
-                <hr class="vertical_line">
-                <div class="col-sm-4 text-justify">
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                        <li>Aliquam tincidunt mauris eu risus.</li>
-                        <li>Vestibulum auctor dapibus neque.</li>
-                    </ul>
-                </div>
-                <div class="col-sm-4 text-justify">
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                        <li>Aliquam tincidunt mauris eu risus.</li>
-                        <li>Vestibulum auctor dapibus neque.</li>
-                    </ul>
-                </div>
+    {% else %}
+    <div style="padding: 50px">
+        <hr>
+        <div style="padding: 50px" class="container-fluid">
+            <h2 align="center">Efetue o login para acesso ao conteúdo </h2>
+            <div style="padding: 50px">
+                <hr>
             </div>
         </div>
-    </footer>
-    {% endblock rodape %}
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
+        {% block rodape_nome %}
+        <div class="bg-secondary text-center container-fluid text-light">
+            Rodape
+        </div>
+        {% endblock rodape_nome %}
+
+        {% block rodape %}
+        <footer class="footer navbar-fixed-botton">
+            <div class="jumbotron jumbotron-fluid text-center">
+
+                <!--Alterar cor de fundo de uma classe bootstrap com css próprio-->
+                <style>
+                    .jumbotron {
+                        background-color: #dddddd !important;
+                    }
+                </style>
+                <!--Fim do script CSS-->
+
+                <div class="row">
+                    <div class="col-sm-4 text-justify">
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aliquam tincidunt mauris eu risus.</li>
+                            <li>Vestibulum auctor dapibus neque.</li>
+                        </ul>
+                    </div>
+                    <hr class="vertical_line">
+                    <div class="col-sm-4 text-justify">
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aliquam tincidunt mauris eu risus.</li>
+                            <li>Vestibulum auctor dapibus neque.</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 text-justify">
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aliquam tincidunt mauris eu risus.</li>
+                            <li>Vestibulum auctor dapibus neque.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {% endblock rodape %}
+        {% else %}
+        {% endif %}
 
 </body>
 

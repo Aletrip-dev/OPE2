@@ -7,10 +7,15 @@ from django.urls import reverse_lazy
 from .models import Usuario, Pedido
 # Create your views here.
 
+# CONTROLE DE LOGIN
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 # ##################################### CREATE #################################
 
 
-class UsuarioCreate(CreateView):
+class UsuarioCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = Usuario
     fields = ['nome_usuario', 'funcao_usuario',
               'nivel_usuario', 'senha_usuario']
@@ -18,7 +23,8 @@ class UsuarioCreate(CreateView):
     success_url = reverse_lazy('inicio')
 
 
-class PedidoCreate(CreateView):
+class PedidoCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
     template_name = 'cadastros/form_pedidos.html'
@@ -28,7 +34,8 @@ class PedidoCreate(CreateView):
 # ##################################### UPDATE #################################
 
 
-class UsuarioUpdate(UpdateView):
+class UsuarioUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = Usuario
     fields = ['nome_usuario', 'funcao_usuario',
               'nivel_usuario', 'senha_usuario']
@@ -36,7 +43,8 @@ class UsuarioUpdate(UpdateView):
     success_url = reverse_lazy('inicio')
 
 
-class PedidoUpdate(UpdateView):
+class PedidoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
     template_name = 'cadastros/form_pedido.html'
@@ -46,13 +54,15 @@ class PedidoUpdate(UpdateView):
 # ##################################### DELETE #################################
 
 
-class UsuarioDelete(DeleteView):
+class UsuarioDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Usuario
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('inicio')
 
 
-class PedidoDelete(DeleteView):
+class PedidoDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-pedidos')
@@ -61,11 +71,13 @@ class PedidoDelete(DeleteView):
 # #########################LISTAR OBJETOS DE UM BANCO ##########################
 
 
-class UsuarioList(ListView):
+class UsuarioList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = Usuario
     template_name = 'cadastros/listas/usuarios.html'
 
 
-class PedidoList(ListView):
+class PedidoList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/listas/pedidos.html'
