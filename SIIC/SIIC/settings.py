@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Aplicações locais
     'paginas.apps.PaginasConfig',
     'cadastros.apps.CadastrosConfig',
+    'usuarios.apps.UsuariosConfig',
+
     'crispy_forms',
     # nomedoapp.apps.Nomedoappconfig
 ]
@@ -148,3 +152,15 @@ STATICFILES_DIRS = [
 ]
 
 # DATABASE_CONNECTION_POOLING = False
+
+
+# CONFIGURAÇÕES DE AUTENTICAÇÃO
+
+# Redireciona usuário para a página pós login
+LOGIN_REDIRECT_URL = 'inicio'
+
+# Redireciona usuário caso não tenha acesso à págiuna
+LOGIN_URL = 'login'
+
+# Redireciona usuário para a página pós logout
+LOGOUT_REDIRECT_URL = 'login'
