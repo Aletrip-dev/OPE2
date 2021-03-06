@@ -5,15 +5,9 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from .models import Usuario, Pedido
-from django.contrib.auth.models import User
 
-from django.conf import settings
-from django.contrib.auth.hashers import check_password
-from django.contrib.auth.models import User
-from django.views.decorators.http import require_POST
 
 # Create your views here.
-
 # CONTROLE DE LOGIN
 from django.contrib.auth.mixins import LoginRequiredMixin
 
