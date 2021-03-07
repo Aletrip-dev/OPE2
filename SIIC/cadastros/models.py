@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 # classe que define os atributos dos campos
@@ -35,6 +36,5 @@ class Pedido(models.Model):
         return "User: {}, Dt: {} --> Total: R$ {}".format(
             self.usuario_pedido, self.data_pedido, self.valor_pedido
             )
-
 
 # conforme diagrama de classes

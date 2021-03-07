@@ -3,9 +3,15 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
+from django.contrib.auth.models import User
+
+
+# lista de usuarios django
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
 from django.urls import reverse_lazy
 from .models import Usuario, Pedido
-
 
 # Create your views here.
 # CONTROLE DE LOGIN
@@ -28,8 +34,16 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
-    template_name = 'cadastros/form_pedidos.html'
+    template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Cadastro de pedidos"
+        context["subtitulo"] = "Cadastro de pedidos para compra de produdos"
+        context["botao"] = "Cadastrar"
+
+        return context
 
 
 # ##################################### UPDATE #################################
@@ -37,9 +51,8 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
 
 class UsuarioUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
-    model = Usuario
-    fields = ['nome_usuario', 'funcao_usuario',
-              'nivel_usuario', 'senha_usuario']
+    model = User
+    fields = ['username', 'email',]
     template_name = 'cadastros/form_user.html'
     success_url = reverse_lazy('inicio')
 
@@ -48,8 +61,16 @@ class PedidoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
-    template_name = 'cadastros/form_pedido.html'
+    template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Editar pedidos"
+        context["subtitulo"] = "Editar pedidos cadastrados no SIIC"
+        context["botao"] = "Editar"
+
+        return context
 
 
 # ##################################### DELETE #################################
@@ -57,7 +78,7 @@ class PedidoUpdate(LoginRequiredMixin, UpdateView):
 
 class UsuarioDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
-    model = Usuario
+    model = User
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('inicio')
 
@@ -74,7 +95,7 @@ class PedidoDelete(LoginRequiredMixin, DeleteView):
 
 class UsuarioList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
-    model = Usuario
+    model = User
     template_name = 'cadastros/listas/usuarios.html'
 
 
