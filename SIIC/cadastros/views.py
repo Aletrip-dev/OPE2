@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
 from django.urls import reverse_lazy
-from .models import Usuario, Pedido
+from .models import Pedido
 
 # Create your views here.
 # CONTROLE DE LOGIN
@@ -19,15 +19,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # ##################################### CREATE #################################
-
-
-class UsuarioCreate(LoginRequiredMixin, CreateView):
-    login_url = reverse_lazy('login')
-    model = Usuario
-    fields = ['nome_usuario', 'funcao_usuario',
-              'nivel_usuario', 'senha_usuario']
-    template_name = 'cadastros/form_user.html'
-    success_url = reverse_lazy('inicio')
 
 
 class PedidoCreate(LoginRequiredMixin, CreateView):

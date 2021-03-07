@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UsuarioCreate, PedidoCreate
+from .views import PedidoCreate
 from .views import UsuarioUpdate, PedidoUpdate
 from .views import UsuarioDelete, PedidoDelete
 from .views import UsuarioList, PedidoList
@@ -8,7 +8,6 @@ from .views import UsuarioList, PedidoList
 
 
 urlpatterns = [
-    path('cadastrar/usuario', UsuarioCreate.as_view(), name='cadastrar-usuario'),
     path('cadastrar/pedido', PedidoCreate.as_view(), name='cadastrar-pedido'),
 
     # UPDATE -- OBTEM O ID ATRAVÉS DA URL
