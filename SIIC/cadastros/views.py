@@ -16,6 +16,7 @@ from .models import Pedido
 # Create your views here.
 # CONTROLE DE LOGIN
 from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import GroupRequiredMixin
 
 
 # ##################################### CREATE #################################
@@ -43,7 +44,7 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
 class UsuarioUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = User
-    fields = ['username', 'email',]
+    fields = ['username', 'email', ]
     template_name = 'cadastros/form_user.html'
     success_url = reverse_lazy('inicio')
 
@@ -84,13 +85,15 @@ class PedidoDelete(LoginRequiredMixin, DeleteView):
 # #########################LISTAR OBJETOS DE UM BANCO ##########################
 
 
-class UsuarioList(LoginRequiredMixin, ListView):
+class UsuarioList(GroupRequiredMixin, LoginRequiredMixin, ListView):
+    group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = User
     template_name = 'cadastros/listas/usuarios.html'
 
 
-class PedidoList(LoginRequiredMixin, ListView):
+class PedidoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
+    group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/listas/pedidos.html'
