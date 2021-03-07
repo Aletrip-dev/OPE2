@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 
 # Create your models here.
@@ -28,7 +30,7 @@ class Pedido(models.Model):
     data_pedido = models.DateField(auto_now=True)
     # chave estrangeira protegida quando há dependências
     usuario_pedido = models.ForeignKey(
-        Usuario, on_delete=models.PROTECT, verbose_name="Usuário responsável"
+        User, on_delete=models.PROTECT, verbose_name="Usuário responsável"
         )
 
     # metodo para pegar o valor do campo para imprimir
