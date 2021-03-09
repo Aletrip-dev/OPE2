@@ -25,10 +25,20 @@ from braces.views import GroupRequiredMixin
 class PedidoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Pedido
-    fields = ['valor_pedido', 'usuario_pedido']
+    fields = ['valor_pedido']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
 
+    # metodo para registrar o usuário que realiza o pedido
+    def form_valid(self, form):
+        # referencia o usuário da clásse no models
+        form.instance.usuario_pedido = self.request.user
+        # antes do supero o objeto da classe não foi criado
+        url = super().form_valid(form)
+        # objeto criado
+        return url
+
+    # efetua a substituição no HTML dos termos constantes nos argumentos
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Cadastro de pedidos"
@@ -41,7 +51,8 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
 # ##################################### UPDATE #################################
 
 
-class UsuarioUpdate(LoginRequiredMixin, UpdateView):
+class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+    group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = User
     fields = ['username', 'email', ]
@@ -49,7 +60,8 @@ class UsuarioUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('inicio')
 
 
-class PedidoUpdate(LoginRequiredMixin, UpdateView):
+class PedidoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+    group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = Pedido
     fields = ['valor_pedido', 'usuario_pedido']
@@ -69,13 +81,16 @@ class PedidoUpdate(LoginRequiredMixin, UpdateView):
 
 
 class UsuarioDelete(LoginRequiredMixin, DeleteView):
-    login_url = reverse_lazy('login')
+
+    login_url = reverse_lazy(GroupRequiredMixin, LoginRequiredMixin, 'login')
+    group_required = u"Adm"
     model = User
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('inicio')
 
 
-class PedidoDelete(LoginRequiredMixin, DeleteView):
+class PedidoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
+    group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/form-excluir.html'
@@ -93,7 +108,7 @@ class UsuarioList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
 
 class PedidoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
-    group_required = u"Adm"
+    group_required = [u"Adm", u"Ger"]
     login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/listas/pedidos.html'

@@ -16,13 +16,12 @@ class Pedido(models.Model):
     data_pedido = models.DateField(auto_now=True)
     # chave estrangeira protegida quando há dependências
     usuario_pedido = models.ForeignKey(
-        User, on_delete=models.PROTECT, verbose_name="Usuário responsável"
-    )
+        User, on_delete=models.PROTECT)
 
     # metodo para pegar o valor do campo para imprimir
     def __str__(self):
-        return "User: {}, Dt: {} --> Total: R$ {}".format(
-            self.usuario_pedido, self.data_pedido, self.valor_pedido
+        return "Dt: {} --> Total: R$ {}".format(
+            self.data_pedido, self.valor_pedido
         )
 
 # conforme diagrama de classes
