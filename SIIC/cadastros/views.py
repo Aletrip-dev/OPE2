@@ -36,6 +36,10 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
         # antes do supero o objeto da classe não foi criado
         url = super().form_valid(form)
         # objeto criado
+
+        # self.object.valor += "[qualquercoisa]"
+        # self.object.save()
+
         return url
 
     # efetua a substituição no HTML dos termos constantes nos argumentos
