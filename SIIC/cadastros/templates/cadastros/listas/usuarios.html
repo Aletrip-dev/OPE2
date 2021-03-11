@@ -20,7 +20,6 @@
             <tr>
                 <th>ID User</th>
                 <th>Nome User</th>
-                <th>Nome Completo</th>
                 <th>Email</th>
                 <th>Opcões</th>
             </tr>
@@ -30,7 +29,6 @@
             <tr>
                 <td>{{User.pk}}</td>
                 <td>{{User.username}}</td>
-                <td>{{User.nome_completo}}</td>
                 <td>{{User.email}}</td>
                 <td>
                     <a href="{% url 'editar-usuario' User.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
