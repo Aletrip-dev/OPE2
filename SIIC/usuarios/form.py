@@ -7,9 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 
 class UsuarioForm(UserCreationForm):
     # campo para personalização do formulário padrão
-    nome_completo = forms.CharField(max_length=100)
+    # nome_completo = forms.CharField(max_length=100)
 
     class Meta:
         model = User
-        fields = ['nome_completo', 'username', 'email', 'password1']
-        
+        fields = ['username', 'email', 'password1']
