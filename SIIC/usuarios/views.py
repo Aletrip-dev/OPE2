@@ -50,4 +50,6 @@ class PerfilUpdate(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["titulo"] = 'Dados pessoais'
+        context["botao"] = 'atualizar'
+
         return context
