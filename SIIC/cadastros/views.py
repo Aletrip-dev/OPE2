@@ -5,16 +5,15 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 
+# Create your views here.
 
 # lista de usuarios django
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-
 from django.urls import reverse_lazy
 from .models import Pedido
 
-# Create your views here.
-# CONTROLE DE LOGIN
+# Controle de login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 
@@ -29,7 +28,7 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
 
-    # metodo para registrar o usuário que realiza o pedido
+    # Metodo para registrar o usuário que realiza o pedido
     def form_valid(self, form):
         # referencia o usuário da clásse no models
         form.instance.usuario_pedido = self.request.user
@@ -37,12 +36,13 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
         url = super().form_valid(form)
         # objeto criado
 
+        # Adicionar um texto ao campo
         # self.object.valor += "[qualquercoisa]"
         # self.object.save()
 
         return url
 
-    # efetua a substituição no HTML dos termos constantes nos argumentos
+    # Efetua a substituição no HTML dos termos constantes nos argumentos
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Cadastro de pedidos"
@@ -115,4 +115,3 @@ class PedidoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/listas/pedidos.html'
-

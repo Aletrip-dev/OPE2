@@ -18,10 +18,8 @@ class Pedido(models.Model):
     usuario_pedido = models.ForeignKey(
         User, on_delete=models.PROTECT)
 
-    # metodo para pegar o valor do campo para imprimir
+    # metodo para pegar o valor do campo e imprimir na tela
     def __str__(self):
         return "Dt: {} --> Total: R$ {}".format(
             self.data_pedido, self.valor_pedido
         )
-
-# conforme diagrama de classes
