@@ -1,11 +1,20 @@
 {% extends 'paginas/modelo.html' %}
-
+{% load static %}
 {% block conteudo %}
 
-<div class="container text-center">
-    <p>
-        <h1 class="secondary">Bem vindo ao SIIC</h1>
-    </p>
-</div>
+<div align="center" class="container-fluid" style="background-image: url({% static 'img/background.jpg' %});">
+    <div style="padding: 20px"></div>
+    <div class="jumbotron" style="background-color: none !important;">
+        <h1 class="display-3">Bem vindo ao SIIC</h1>
+        <p class="lead">Sistema Integrado de Inventário e Controle</p>
+        <hr class="my-2">
+        <p>Mais informações</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
+        </p>
 
+    </div>
+    <div style="padding: 10px"></div>
+
+</div>
 {% endblock conteudo %}
