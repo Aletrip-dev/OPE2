@@ -80,6 +80,7 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'usuarios.Usuario'
 WSGI_APPLICATION = 'SIIC.wsgi.application'
 
 

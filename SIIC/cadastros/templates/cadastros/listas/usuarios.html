@@ -21,25 +21,26 @@
                 <th>ID User</th>
                 <th>Nome User</th>
                 <th>Email</th>
-                <th>Primeiro nome</th>
+                <th>Nome completo</th>
+                <th>CPF</th>
                 <th>Sobrenome</th>
                 <th>Data do registro</th>
                 <th>Opcões</th>
             </tr>
 
-            {% for User in object_list %}
+            {% for Usuario in object_list %}
 
             <tr>
-                <td>{{User.pk}}</td>
-                <td>{{User.username}}</td>
-                <td>{{User.email}}</td>
-                <td>{{User.first_name}}</td>
-                <td>{{User.last_name}}</td>
-                <td>{{User.date_joined}}</td>
+                <td>{{Usuario.pk}}</td>
+                <td>{{Usuario.username}}</td>
+                <td>{{Usuario.email}}</td>
+                <td>{{Usuario.nome_completo}}</td>
+                <td>{{Usuario.cpf}}</td>
+                <td>{{Usuario.date_joined}}</td>
                 <td>
-                    <a href="{% url 'editar-usuario' User.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
+                    <a href="{% url 'editar-usuario' Usuario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
                             class="fas fa-edit" aria-hidden="true"></i></a>
-                    <a href="{% url 'excluir-usuario' User.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i
+                    <a href="{% url 'excluir-usuario' Usuario.pk %}" class="btn btn-danger btn-sm" title="Excluir"><i
                             class="fas fa-trash-alt" aria-hidden="true"></i></a>
                 </td>
             </tr>

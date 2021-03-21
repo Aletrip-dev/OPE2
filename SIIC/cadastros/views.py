@@ -4,6 +4,7 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
+from usuarios.models import Usuario
 
 # Create your views here.
 
@@ -24,7 +25,7 @@ from braces.views import GroupRequiredMixin
 class PedidoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Pedido
-    fields = ['valor_pedido']
+    fields = ['valor_pedido', 'usuario_pedido']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
 
@@ -57,8 +58,8 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
 class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Adm"
     login_url = reverse_lazy('login')
-    model = User
-    fields = ['username', 'email', 'first_name', 'last_name']
+    model = Usuario
+    fields = ['username', 'email', 'nome_completo', 'cpf']
     template_name = 'cadastros/form_user.html'
     success_url = reverse_lazy('inicio')
 
@@ -66,7 +67,7 @@ class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 class PedidoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Adm"
     login_url = reverse_lazy('login')
-    model = Pedido
+    model = Usuario
     fields = ['valor_pedido', 'usuario_pedido']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
@@ -87,7 +88,7 @@ class UsuarioDelete(LoginRequiredMixin, DeleteView):
 
     login_url = reverse_lazy(GroupRequiredMixin, LoginRequiredMixin, 'login')
     group_required = u"Adm"
-    model = User
+    model = Usuario
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('inicio')
 
@@ -106,7 +107,7 @@ class PedidoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
 class UsuarioList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     group_required = u"Adm"
     login_url = reverse_lazy('login')
-    model = User
+    model = Usuario
     template_name = 'cadastros/listas/usuarios.html'
 
 

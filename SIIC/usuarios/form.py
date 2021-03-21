@@ -1,10 +1,12 @@
 # FORMULÁRIO PADRÃO DO DJANGO E ALTERAÇÕES DIVERSAS
 
 # from SIIC.usuarios.models import Perfil
+# from SIIC.usuarios.models import Usuario
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Perfil
+from .models import Usuario
+# from .models import Perfil
 
 
 class UsuarioForm(UserCreationForm):
@@ -12,5 +14,5 @@ class UsuarioForm(UserCreationForm):
     # nome_completo = forms.CharField(max_length=100)
 
     class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1']
+        model = Usuario
+        fields = ['username', 'nome_completo', 'cpf', 'email', 'password1', 'password2']
