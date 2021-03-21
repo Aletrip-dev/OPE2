@@ -4,13 +4,16 @@ from .form import UsuarioForm
 from django.urls import reverse_lazy
 from .models import Perfil
 from django.shortcuts import get_object_or_404
+from braces.views import GroupRequiredMixin
 
 # Create your views here.
 
 # criar usuários no django
 
 
-class UsuarioCreate(CreateView):
+class UsuarioCreate(GroupRequiredMixin, CreateView):
+    group_required = u"Adm"
+    login_url = reverse_lazy('login')
     template_name = "cadastros/form_user.html"
     form_class = UsuarioForm
     success_url = reverse_lazy('inicio')
@@ -39,10 +42,10 @@ class UsuarioCreate(CreateView):
 class PerfilUpdate(UpdateView):
     template_name = 'cadastros/form.html'
     model = Perfil
-    fields = ['nome_completo', 'funcao', 'data_registro', 'data_exclusao']
+    fields = ['nome_completo', 'primeiro_nome', 'sobrenome', 'funcao']
     success_url = reverse_lazy('inicio')
 
-    # metodo para pegart o usuário sem ser pelo pk na url
+    # metodo para selecionar o usuário sem ser pelo pk na url
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Perfil, usuario=self.request.user)
         return self.object

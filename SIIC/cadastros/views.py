@@ -58,7 +58,7 @@ class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = User
-    fields = ['username', 'email', ]
+    fields = ['username', 'email', 'first_name', 'last_name']
     template_name = 'cadastros/form_user.html'
     success_url = reverse_lazy('inicio')
 
