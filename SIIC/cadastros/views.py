@@ -112,7 +112,7 @@ class UsuarioList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
 
 class PedidoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
-    group_required = [u"Adm", u"Ger"]
+    group_required = [u"Adm", u"Padrão"]
     login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/listas/pedidos.html'

@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from usuarios.models import Usuario
 
 
-
 # Create your models here.
 
 # classe que define os atributos dos campos
