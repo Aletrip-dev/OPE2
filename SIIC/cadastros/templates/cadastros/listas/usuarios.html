@@ -58,7 +58,7 @@
         {% block scripts %}
         <script>
             $(document).ready(function () {
-                $("#tabela_listar_usuario").DataTable({
+                $("tabela_listar_usuario").DataTable($('#tabela​-listar').DataTable({
                     responsive: true,
                     // "bSort": false,
                     "aaSorting": [],
@@ -67,13 +67,13 @@
                         "decimal": "",
                         "emptyTable": "Sem dados disponíveis",
                         "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
-                        "infoEmpty": "Mostrando de 0 até 0 de 0 registros",
-                        "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                        "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+                        "infoFiltered": "(filtrado de _MAX_ registos no total)",
                         "infoPostFix": "",
                         "thousands": ",",
                         "lengthMenu": "Mostrar _MENU_ registos",
-                        "loadingRecords": "Carregando...",
-                        "processing": "Processando...",
+                        "loadingRecords": "A carregar dados...",
+                        "processing": "A processar...",
                         "search": "Procurar:",
                         "zeroRecords": "Não foram encontrados resultados",
                         "paginate": {
@@ -87,10 +87,10 @@
                             "sortDescending": ": ordem decrescente"
                         }
                     }
-                });
+                }););
             });
-            {% endblock scripts %}
         </script>
+        {% endblock scripts %}
         <hr>    
     </div>
 </div>
