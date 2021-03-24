@@ -6,18 +6,6 @@ from django.contrib.auth.models import User, Group
 # Create your models here.
 
 
-# class Perfil(models.Model):
-#     nome_completo = models.CharField(
-#         max_length=255, null=True, verbose_name='Nome completo'
-#     )
-#     primeiro_nome = models.CharField(max_length=50, verbose_name='Primeiro nome')
-#     sobrenome = models.CharField(max_length=50, verbose_name='Sobrenome')
-#     funcao = models.CharField(max_length=50, verbose_name='Função')
-#     data_registro = models.DateField(auto_now=True)
-#     data_exclusao = models.DateField(null=True, blank=True)
-#     # relação um pra um com o usuário do sistema
-#     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-
 ################## CUSTOM USER MODEL ###########################
 class Administrador(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -58,6 +46,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         max_length=50, unique=True, verbose_name="Nome de usuário")
     email = models.EmailField(verbose_name='email',
                               max_length=255, unique=True)
+    telefone = models.CharField(max_length=15, verbose_name='Telefone')
     date_joined = models.DateTimeField(verbose_name="data de registro",
                                        auto_now=True)
     last_login = models.DateTimeField(

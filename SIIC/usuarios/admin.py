@@ -4,6 +4,7 @@ from .models import Usuario
 
 # Register your models here.
 
+
 @admin.register(Usuario)
 # admin.site.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
@@ -14,5 +15,5 @@ class UsuarioAdmin(admin.ModelAdmin):
         'email',
         'date_joined'
     )
-    search_fields=('username',)
-    list_filter=('username',)
+    search_fields = ('username',)
+    list_filter = ('username',)
