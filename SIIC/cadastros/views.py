@@ -25,7 +25,7 @@ from braces.views import GroupRequiredMixin
 class PedidoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Pedido
-    fields = ['valor_pedido', 'usuario_pedido']
+    fields = ['valor_pedido']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
 
@@ -59,7 +59,7 @@ class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = Usuario
-    fields = ['username', 'email', 'nome_completo', 'cpf']
+    fields = ['username', 'email', 'nome_completo', 'cpf', 'telefone']
     template_name = 'cadastros/form_user.html'
     success_url = reverse_lazy('inicio')
 
@@ -68,7 +68,7 @@ class PedidoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Adm"
     login_url = reverse_lazy('login')
     model = Usuario
-    fields = ['valor_pedido', 'usuario_pedido']
+    fields = ['valor_pedido']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
 

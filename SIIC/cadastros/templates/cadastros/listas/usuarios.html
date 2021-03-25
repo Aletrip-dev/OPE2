@@ -58,7 +58,7 @@
         {% block scripts %}
         <script>
             $(document).ready(function () {
-                $("tabela_listar_usuario").DataTable($('#tabela​-listar').DataTable({
+                $("tabela_listar_usuario").DataTable($('#tabela_listar_usuario').DataTable({
                     responsive: true,
                     // "bSort": false,
                     "aaSorting": [],
@@ -88,6 +88,7 @@
                         }
                     }
                 }););
+                
             });
         </script>
         {% endblock scripts %}
