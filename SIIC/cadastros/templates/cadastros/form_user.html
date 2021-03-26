@@ -13,10 +13,35 @@
     <hr>
     <form class="container container-fluid" action="" method="POST">
         {% csrf_token %}
-        <!--autenticador-->
+        {% comment %} Formulario personalizado
+            <div class="row">
+                <div class="form-group col-md-4 mb-0">
+                    {{form.username|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-8 mb-0">
+                    {{form.email|as_crispy_field}}
+                </div>
+            </div>
+                {{form.nome_completo|as_crispy_field}}
+            <div class="row">
+                <div class="form-group col-md-6 mb-0">
+                    {{form.cpf|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{form.telefone|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-0">
+                    {{form.password1|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{form.password2|as_crispy_field}}
+                </div>
+            </div> {% endcomment %}
         {{ form|crispy }}
         <!--formulário exibido como parágrafo-->
-        <p align=right>*Campo com preenchimento obrigatório</p>
+        <p align=left>*Campo com preenchimento obrigatório</p>
         <button class="btn btn-primary" type="submit">Cadastar</button>
     </form>
     <hr>

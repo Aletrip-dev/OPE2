@@ -3,8 +3,8 @@ from django.contrib.auth.models import User, Group
 from .form import UsuarioForm
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
-from braces.views import GroupRequiredMixin
-# from .models import Perfil
+from braces.views import LoginRequiredMixin, GroupRequiredMixin
+from .models import Usuario
 
 # Create your views here.
 
@@ -34,4 +34,23 @@ class UsuarioCreate(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['titulo'] = 'Registro de novo usuário'
+        return context
+
+
+class PerfilUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'cadastros/form.html'
+    model = Usuario
+    fields = ['nome_completo', 'email', 'telefone']
+    success_url = reverse_lazy('inicio')
+
+    # metodo para pegart o usuário sem ser pelo pk na url
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Usuario, username=self.request.user)
+        return self.object
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["titulo"] = 'Dados pessoais'
+        context["botao"] = 'atualizar'
+
         return context
