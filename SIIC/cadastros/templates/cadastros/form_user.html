@@ -13,7 +13,7 @@
     <hr>
     <form class="container container-fluid" action="" method="POST">
         {% csrf_token %}
-        {% comment %} Formulario personalizado
+        {% comment %} Formulario personalizado {% endcomment %}
             <div class="row">
                 <div class="form-group col-md-4 mb-0">
                     {{form.username|as_crispy_field}}
@@ -38,8 +38,8 @@
                 <div class="form-group col-md-6 mb-0">
                     {{form.password2|as_crispy_field}}
                 </div>
-            </div> {% endcomment %}
-        {{ form|crispy }}
+            </div>
+        {% comment %} {{ form|crispy }} {% endcomment %}
         <!--formulário exibido como parágrafo-->
         <p align=left>*Campo com preenchimento obrigatório</p>
         <button class="btn btn-primary" type="submit">Cadastar</button>

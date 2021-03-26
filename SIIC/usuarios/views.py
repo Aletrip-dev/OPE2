@@ -9,7 +9,7 @@ from .models import Usuario
 # Create your views here.
 
 
-class UsuarioCreate(CreateView):
+class UsuarioCreate(GroupRequiredMixin, CreateView):
     group_required = u"Adm"
     login_url = reverse_lazy('login')
     template_name = "cadastros/form_user.html"
