@@ -60,9 +60,14 @@ class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Usuario
     fields = ['username', 'email', 'nome_completo', 'cpf', 'telefone']
-    template_name = 'cadastros/form_user.html'
+    template_name = 'cadastros/form.html'
     success_url = reverse_lazy('inicio')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["titulo"] = 'Atualizar dados do usuário'
+        context["botao"] = 'atualizar'
+        return context
 
 class PedidoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Adm"
@@ -77,7 +82,6 @@ class PedidoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
         context["titulo"] = "Editar pedidos"
         context["subtitulo"] = "Editar pedidos cadastrados no SIIC"
         context["botao"] = "Editar"
-
         return context
 
 

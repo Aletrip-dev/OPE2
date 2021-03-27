@@ -1,10 +1,13 @@
+from django.contrib.auth import update_session_auth_hash
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User, Group
 from .form import UsuarioForm
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
 from .models import Usuario
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 # Create your views here.
 
@@ -52,5 +55,18 @@ class PerfilUpdate(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(*args, **kwargs)
         context["titulo"] = 'Dados pessoais'
         context["botao"] = 'atualizar'
-
         return context
+
+# metodo para alteração de senha do usuário logado
+
+
+def alterar_senha(request):
+    if request.method == "POST":
+        form_senha = PasswordChangeForm(request.user, request.POST)
+        if form_senha.is_valid():
+            user = form_senha.save()
+            update_session_auth_hash(request, user)
+            return redirect('inicio')
+    else:
+        form_senha = PasswordChangeForm(request.user)
+    return render(request, 'usuarios/alterar_senha.html', {'form_senha': form_senha})
