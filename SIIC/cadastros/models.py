@@ -4,7 +4,6 @@ from usuarios.models import Usuario
 
 
 # Create your models here.
-
 # classe que define os atributos dos campos
 # conforme o atributo da classe também valida os campos
 # cada classe representa uma tabela na base de dados
@@ -46,12 +45,14 @@ class Pedido(models.Model):
     tipo_movimentacao = models.ForeignKey(
         TipoMovimentacao, on_delete=models.PROTECT, verbose_name='Movimentação')
 
+
+
     # chave estrangeira protegida quando há dependências
     # usuario_pedido = models.ForeignKey(
     #      Usuario, on_delete=models.PROTECT)
 
     # metodo para pegar o valor do campo e imprimir na tela
-    # def __str__(self):
-    #     return "Dt: {} --> Total: R$ {}".format(
-    #         self.data_pedido, self.valor_pedido, self.data_fechamento, self.frete, self.nota_fiscal, self.pedido_ususario, self.status_pedido, self.tipo_movimentacao
-    #     )
+    def __str__(self):
+        return "Usuário: {}".format(
+            self.pedido_usuario
+        )

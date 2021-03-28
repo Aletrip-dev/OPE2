@@ -1,7 +1,5 @@
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import UpdateView
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 from usuarios.models import Usuario
@@ -25,7 +23,7 @@ from braces.views import GroupRequiredMixin
 class PedidoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Pedido
-    fields = ['valor_pedido']
+    fields = ['data_fechamento', 'nota_fiscal', 'pedido_ususario', 'status_pedido', 'tipo_movimentacao', 'frete', 'valor_pedido']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
 
@@ -36,11 +34,9 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
         # antes do supero o objeto da classe não foi criado
         url = super().form_valid(form)
         # objeto criado
-
         # Adicionar um texto ao campo
         # self.object.valor += "[qualquercoisa]"
         # self.object.save()
-
         return url
 
     # Efetua a substituição no HTML dos termos constantes nos argumentos
@@ -49,6 +45,7 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
         context["titulo"] = "Cadastro de pedidos"
         context["subtitulo"] = "Cadastro de pedidos para compra de produdos"
         context["botao"] = "Cadastrar"
+        
 
         return context
 

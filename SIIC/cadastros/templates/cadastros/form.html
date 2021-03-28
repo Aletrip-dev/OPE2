@@ -7,13 +7,13 @@
 {% endblock titulo %}
 
 
-
 {% block conteudo %}
 <div class="jumbotron jumbotron-fluid bg-light">
     <H4 class="container"align=center>{{titulo}}</H4>
     <p class="lead" align=center>{{subtitulo}}</p>
     <hr>
         <form class="container container-fluid" action="" method="POST">
+        <h3>{{request.Pedido}}</h3>
             {% csrf_token %} <!--autenticador-->
             {{ form|crispy }} <!--formulário exibido como parágrafo-->
             <p align=right>*Campo com preenchimento obrigatório</p>
@@ -36,7 +36,6 @@
                 field.mask(SPMaskBehavior.apply({}, arguments), options);
                 }
             };
-
             $('#id_telefone').mask(SPMaskBehavior, spOptions);
         });
     </script>
