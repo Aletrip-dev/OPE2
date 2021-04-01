@@ -2,7 +2,7 @@ from django.urls import path
 from .views import PedidoCreate
 from .views import UsuarioUpdate, PedidoUpdate
 from .views import UsuarioDelete, PedidoDelete
-from .views import UsuarioList, PedidoList
+from .views import UsuarioList, PedidoList, StatusCreate, CorCreate, TipoMovCreate, TamanhoProdutoCreate
 
 # from .views import IndexView
 
@@ -14,6 +14,12 @@ urlpatterns = [
     path('editar/usuario/<int:pk>/',
          UsuarioUpdate.as_view(), name='editar-usuario'),
     path('editar/pedido/<int:pk>/', PedidoUpdate.as_view(),  name='editar-pedido'),
+    path('cadastrar/status', StatusCreate.as_view(), name='cadastrar-status'),
+    path('cadastrar/cor', CorCreate.as_view(), name='cadastrar-cor'),
+    path('cadastrar/movimentacao', TipoMovCreate.as_view(),
+         name='cadastrar-movimentacao'),
+    path('cadastrar/tamanho', TamanhoProdutoCreate.as_view(),
+         name='cadastrar-tamanho'),
 
     # DELETE -- OBTEM O ID ATRAVÉS DA URL
     path('excluir/usuario/<int:pk>/',

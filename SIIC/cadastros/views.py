@@ -10,7 +10,7 @@ from usuarios.models import Usuario
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
-from .models import Pedido
+from .models import CorProduto, Pedido, StatusPedido, TipoMovimentacao, TamanhoProduto
 
 # Controle de login
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -23,7 +23,8 @@ from braces.views import GroupRequiredMixin
 class PedidoCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Pedido
-    fields = ['data_fechamento', 'nota_fiscal', 'pedido_ususario', 'status_pedido', 'tipo_movimentacao', 'frete', 'valor_pedido']
+    fields = ['data_fechamento', 'nota_fiscal', 'pedido_ususario',
+              'status_pedido', 'tipo_movimentacao', 'frete', 'valor_pedido']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-pedidos')
 
@@ -42,14 +43,92 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
     # Efetua a substituição no HTML dos termos constantes nos argumentos
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titulo"] = "Cadastro de pedidos"
-        context["subtitulo"] = "Cadastro de pedidos para compra de produdos"
+        context["titulo"] = "Novo pedido"
+        context["subtitulo"] = "Cadastro de pedidos para compra/venda de produdos"
         context["botao"] = "Cadastrar"
-        
-
         return context
 
-# ##################################### UPDATE #################################
+
+class StatusCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = StatusPedido
+    fields = ['status_pedido']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('inicio')
+
+    def form_valid(self, form):
+        form.instance.usuario_pedido = self.request.user
+        url = super().form_valid(form)
+        return url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Cadastrar novo status de pedidos"
+        context["subtitulo"] = "Cadastro de status"
+        context["botao"] = "Cadastrar"
+        return context
+
+
+class CorCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = CorProduto
+    fields = ['cor_produto']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('inicio')
+
+    def form_valid(self, form):
+        form.instance.usuario_pedido = self.request.user
+        url = super().form_valid(form)
+        return url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Cadastrar nova cor de produto"
+        context["subtitulo"] = "Cadastro de cores"
+        context["botao"] = "Cadastrar"
+        return context
+
+
+class TipoMovCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = TipoMovimentacao
+    fields = ['tipo_movimentacao']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('inicio')
+
+    def form_valid(self, form):
+        form.instance.usuario_pedido = self.request.user
+        url = super().form_valid(form)
+        return url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Cadastrar novo tipo de movimentação"
+        context["subtitulo"] = "Cadastro de movimentações"
+        context["botao"] = "Cadastrar"
+        return context
+
+
+class TamanhoProdutoCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = TamanhoProduto
+    fields = ['tamanho_produto']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('inicio')
+
+    def form_valid(self, form):
+        form.instance.usuario_pedido = self.request.user
+        url = super().form_valid(form)
+        return url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Cadastrar novo tamanho de produto"
+        context["subtitulo"] = "Cadastro de tamanhos"
+        context["botao"] = "Cadastrar"
+        return context
+
+    # ##################################### UPDATE #################################
 
 
 class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
@@ -65,6 +144,7 @@ class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
         context["titulo"] = 'Atualizar dados do usuário'
         context["botao"] = 'atualizar'
         return context
+
 
 class PedidoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u"Adm"
