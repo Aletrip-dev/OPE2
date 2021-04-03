@@ -81,7 +81,10 @@
                         <hr>
                         <a class="dropdown-item" href="{% url 'cadastrar-movimentacao' %}">Cadastrar movimentacao</a>                        
                         <hr>
-                        <a class="dropdown-item" href="{% url 'cadastrar-tamanho' %}">Cadastrar tamanho</a>                        
+                        <a class="dropdown-item" href="{% url 'cadastrar-tamanho' %}">Cadastrar tamanho</a>
+                        <hr>
+                        <a class="dropdown-item" href="{% url 'cadastrar-produto' %}">Cadastrar produto</a>
+                                               
                                        
                     </div>
                 </li>
@@ -100,6 +103,8 @@
                         <a class="dropdown-item" href="{% url 'listar-usuarios' %}">Lista de usuários</a>
                         <hr>
                         <a class="dropdown-item" href="{% url 'listar-pedidos' %}">Lista de pedidos</a>
+                        <hr>
+                        <a class="dropdown-item" href="{% url 'listar-produtos' %}">Lista de produtos</a>
                     </div>
                 </li>
                 {% else %}
