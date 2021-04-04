@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import PedidoCreate
-from .views import UsuarioUpdate, PedidoUpdate
-from .views import UsuarioDelete, PedidoDelete
+from .views import UsuarioUpdate, PedidoUpdate, ProdutoUpdate
+from .views import UsuarioDelete, PedidoDelete, ProdutoDelete
 from .views import UsuarioList, PedidoList, StatusCreate, CorCreate, TipoMovCreate, TamanhoProdutoCreate, ProdutoCreate, ItemCreate, ProdutoList
 
 # from .views import IndexView
@@ -14,6 +14,8 @@ urlpatterns = [
      path('editar/usuario/<int:pk>/',
           UsuarioUpdate.as_view(), name='editar-usuario'),
      path('editar/pedido/<int:pk>/', PedidoUpdate.as_view(),  name='editar-pedido'),
+     path('editar/produto/<int:pk>', ProdutoUpdate.as_view(), name='editar-produto'),
+
      path('cadastrar/status', StatusCreate.as_view(), name='cadastrar-status'),
      path('cadastrar/cor', CorCreate.as_view(), name='cadastrar-cor'),
      path('cadastrar/movimentacao', TipoMovCreate.as_view(),
@@ -28,10 +30,11 @@ urlpatterns = [
           UsuarioDelete.as_view(), name='excluir-usuario'),
      path('excluir/pedido/<int:pk>/',
           PedidoDelete.as_view(),  name='excluir-pedido'),
+     path('excluir/produto/<int:pk>', ProdutoDelete.as_view(), name='excluir-produto'),
 
     # LISTAR BANCO
      path('listar/usuarios/', UsuarioList.as_view(), name='listar-usuarios'),
      path('listar/pedidos/', PedidoList.as_view(), name='listar-pedidos'),
-     path('listar/propdutos/', ProdutoList.as_view(), name='listar-produtos'),
+     path('listar/produtos/', ProdutoList.as_view(), name='listar-produtos'),
 
 ]

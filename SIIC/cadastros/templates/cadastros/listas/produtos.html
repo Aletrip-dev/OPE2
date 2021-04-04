@@ -1,16 +1,18 @@
 {% extends 'paginas/modelo.html' %}
 
 {% load static %}
-
+{% block titulo %}
+<title>Lista de produtos</title>
+{% endblock titulo %}
 
 {% block titulo_pagina %}
-<h1 align="center">USUÁRIOS CADASTRADOS</h1>
+<h1 align="center">Produtos cadastrados</h1>
 {% endblock titulo_pagina %}
 
 {% block conteudo %}
 
 <p>
-    <h2 align=center>Lista de usuários cadastrados no SIIC</h2>
+    <h2 align=center>Lista de produtos cadastrados no SIIC</h2>
 </p>
 
 <div class="container-fluid">
@@ -26,6 +28,7 @@
                     <th>Cor</th>
                     <th>Preço unitário</th>
                     <th>Quantidade disponível</th>
+                    <th>Opções</th>
                 </tr>
             </thead>
 
@@ -39,12 +42,12 @@
                     <td>{{Produto.cor_produto}}</td>
                     <td>{{Produto.preco_unitario}}</td>
                     <td>{{Produto.quantidade_disponivel}}</td>
-                    {% comment %} <td>
-                        <a href="{% url 'editar-usuario' Usuario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
+                    <td>
+                        <a href="{% url 'editar-produto' Produto.pk %}" class="btn btn-warning btn-sm" title="Editar"><i
                                 class="fas fa-edit" aria-hidden="true"></i></a>
-                        <a href="{% url 'excluir-usuario' Usuario.pk %}" class="btn btn-danger btn-sm"
+                        <a href="{% url 'excluir-produto' Produto.pk %}" class="btn btn-danger btn-sm"
                             title="Excluir"><i class="fas fa-trash-alt" aria-hidden="true"></i></a>
-                    </td> {% endcomment %}
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>

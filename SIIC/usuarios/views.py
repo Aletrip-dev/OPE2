@@ -36,6 +36,7 @@ class UsuarioCreate(GroupRequiredMixin, CreateView):
     # personalizado
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context["titulo_pagina"] = "Cadastrar usuário"
         context['titulo'] = 'Registro de novo usuário'
         return context
 
@@ -53,6 +54,7 @@ class PerfilUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context["titulo_pagina"] = "Atualizar perfil"
         context["titulo"] = 'Dados pessoais'
         context["botao"] = 'atualizar'
         return context

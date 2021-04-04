@@ -43,6 +43,7 @@ class PedidoCreate(LoginRequiredMixin, CreateView):
     # Efetua a substituição no HTML dos termos constantes nos argumentos
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Cadastro de pedidos"
         context["titulo"] = "Novo pedido"
         context["subtitulo"] = "Cadastro de pedidos para compra/venda de produdos"
         context["botao"] = "Cadastrar"
@@ -63,6 +64,7 @@ class StatusCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Cadastro de status"
         context["titulo"] = "Cadastrar novo status de pedidos"
         context["subtitulo"] = "Cadastro de status"
         context["botao"] = "Cadastrar"
@@ -83,6 +85,7 @@ class CorCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Cadastro de cor"
         context["titulo"] = "Cadastrar nova cor de produto"
         context["subtitulo"] = "Cadastro de cores"
         context["botao"] = "Cadastrar"
@@ -103,6 +106,7 @@ class TipoMovCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Cadastro de movimentação"
         context["titulo"] = "Cadastrar novo tipo de movimentação"
         context["subtitulo"] = "Cadastro de movimentações"
         context["botao"] = "Cadastrar"
@@ -123,6 +127,7 @@ class TamanhoProdutoCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Cadastro de tamanho"
         context["titulo"] = "Cadastrar novo tamanho de produto"
         context["subtitulo"] = "Cadastro de tamanhos"
         context["botao"] = "Cadastrar"
@@ -141,6 +146,7 @@ class ProdutoCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Cadastro de produto"
         context ['titulo'] = 'Cadastrar novo produto'
         context ['subtitulo'] = 'Cadastro de produtos'
         context ['botao'] = 'Cadastrar'
@@ -160,6 +166,7 @@ class ItemCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Cadastro de item"
         context ['titulo'] = 'Cadastrar novo item'
         context ['subtitulo'] = 'Cadastro de itens'
         context ['botao'] = 'Cadastrar'
@@ -179,6 +186,7 @@ class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context["titulo_pagina"] = "Atualizar usuário"
         context["titulo"] = 'Atualizar dados do usuário'
         context["botao"] = 'atualizar'
         return context
@@ -194,17 +202,33 @@ class PedidoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Atualizar pedido"
         context["titulo"] = "Editar pedidos"
         context["subtitulo"] = "Editar pedidos cadastrados no SIIC"
         context["botao"] = "Editar"
         return context
 
 
+class ProdutoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+    group_required = [u"Adm", u"Padrão"]
+    login_url = reverse_lazy('login')
+    model = Produto
+    fields = ['nome_produto', 'descricao_produto', 'preco_unitario', 'tamanho_produto', 'cor_produto', 'quantidade_disponivel']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-produtos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo_pagina"] = "Atualizar produto"
+        context["titulo"] = "Editar produtos"
+        context["subtitulo"] = "Editar produtos cadastrados no SIIC"
+        context["botao"] = "Editar"
+        return context
+
 # ##################################### DELETE #################################
 
 
 class UsuarioDelete(LoginRequiredMixin, DeleteView):
-
     login_url = reverse_lazy(GroupRequiredMixin, LoginRequiredMixin, 'login')
     group_required = u"Adm"
     model = Usuario
@@ -219,6 +243,13 @@ class PedidoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-pedidos')
 
+
+class ProdutoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
+    group_required = [u"Adm", u"Padrão"]
+    login_url = reverse_lazy('login')
+    model = Produto
+    template_name = 'cadastros/form-excluir.html'
+    success_url = reverse_lazy('listar-produtos')
 
 # #########################LISTAR OBJETOS DE UM BANCO ##########################
 

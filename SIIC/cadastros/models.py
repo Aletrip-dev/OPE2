@@ -11,7 +11,7 @@ from usuarios.models import Usuario
 
 class StatusPedido(models.Model):
     status_pedido = models.CharField(
-        max_length=50, verbose_name='Status do pedidos')
+        max_length=50, verbose_name='Status do pedidos', unique=True)
 
     def __str__(self):
         return "{}".format(self.status_pedido)
@@ -19,7 +19,7 @@ class StatusPedido(models.Model):
 
 class TipoMovimentacao(models.Model):
     tipo_movimentacao = models.CharField(
-        max_length=50, verbose_name="Tipo de movimentação")
+        max_length=50, verbose_name="Tipo de movimentação", unique=True)
 
     def __str__(self):
         return "{}".format(self.tipo_movimentacao)
@@ -27,7 +27,7 @@ class TipoMovimentacao(models.Model):
 
 class CorProduto(models.Model):
     cor_produto = models.CharField(
-        max_length=50, verbose_name='Cor do produto')
+        max_length=50, verbose_name='Cor do produto', unique=True)
 
     def __str__(self):
         return "{}".format(self.cor_produto)
@@ -35,7 +35,7 @@ class CorProduto(models.Model):
 
 class TamanhoProduto(models.Model):
     tamanho_produto = models.CharField(
-        max_length=50, verbose_name='Tamanho do produto')
+        max_length=50, verbose_name='Tamanho do produto', unique=True)
 
     def __str__(self):
         return "{}".format(self.tamanho_produto)
@@ -70,11 +70,13 @@ class Pedido(models.Model):
 class Produto(models.Model):
     nome_produto = models.CharField(max_length=50, verbose_name='Nome do produto')
     descricao_produto = models.CharField(max_length=255, verbose_name='Descrição do produto', blank=True)
-    preco_unitario = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Preço unitário')
+    preco_unitario = models.DecimalField(max_digits=6, decimal_places=2, verbose_name='Preço unitário')
     quantidade_disponivel = models.PositiveIntegerField(verbose_name='Quantidade disponíve')
     tamanho_produto = models.ForeignKey(TamanhoProduto, verbose_name="Tamanho do produto", on_delete=models.CASCADE)
     cor_produto = models.ForeignKey(CorProduto, verbose_name="Cor do produto", on_delete=models.CASCADE)
 
+    def __str__(self):
+        return "{}".format(self.nome_produto)
 
 class Item(models.Model):
     quantidade_item = models.IntegerField(verbose_name="Quantidade de produtos")
