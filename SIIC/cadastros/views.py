@@ -182,7 +182,7 @@ class UsuarioUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Usuario
     fields = ['username', 'email', 'nome_completo', 'cpf', 'telefone']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-usuarios')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -233,7 +233,7 @@ class UsuarioDelete(LoginRequiredMixin, DeleteView):
     group_required = u"Adm"
     model = Usuario
     template_name = 'cadastros/form-excluir.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-usuarios')
 
 
 class PedidoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
@@ -262,7 +262,7 @@ class UsuarioList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
 
 class PedidoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
-    group_required = [u"Adm", u"Padrão"]
+    group_required = [u"Adm", u"Padrão"]    
     login_url = reverse_lazy('login')
     model = Pedido
     template_name = 'cadastros/listas/pedidos.html'

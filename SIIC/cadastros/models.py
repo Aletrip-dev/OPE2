@@ -29,6 +29,9 @@ class CorProduto(models.Model):
     cor_produto = models.CharField(
         max_length=50, verbose_name='Cor do produto', unique=True)
 
+    class Meta:
+        ordering = ['cor_produto']
+
     def __str__(self):
         return "{}".format(self.cor_produto)
 
