@@ -16,9 +16,14 @@
 </p>
 
 <div class="container-fluid">
+    <style>
+    .dataTables_filter{
+            float: right !important;
+        }
+    </style>
     <hr>
     <div class="table-responsive">
-        <table class="table table-hover table-condensed" id='tabela_listar_usuario'>
+        <table class="table table-hover table-condensed" id='tabela_listar_produtos'>
 
             <thead class="thead-dark">
                 <tr>
@@ -58,13 +63,11 @@
 
         </table>
         {% comment %} Datatable Jquery {% endcomment %}
+        {% block scripts %}
         <script>
-                {% block scripts %}
-
-            $(document).ready(function(){
-                          $('#tabela_listar_usuario').DataTable({
-                    responsive: true,
-                    // "bSort": false,
+            $(document).ready(function () {
+                $('#tabela_listar_produtos').DataTable({
+                    retrieve: true,
                     "aaSorting": [],
                     "pageLength": 50,
                     "language": {
@@ -90,12 +93,15 @@
                             "sortAscending": ": ordem crescente",
                             "sortDescending": ": ordem decrescente"
                         }
+
                     }
+
                 });
-            })
-        {% endblock scripts %}
+            });
         </script>
-        <hr>    
+
+        {% endblock scripts %}
+        <hr>
     </div>
 </div>
 {% endblock conteudo %}
