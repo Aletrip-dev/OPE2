@@ -67,27 +67,24 @@
 
                 {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="Cadastros" data-toggle="dropdown">
                         Cadastros
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'registrar' %}">Cadastro de usuários</a>
                         <hr>
-                        <a class="dropdown-item" href="{% url 'cadastrar-pedido' %}">Cadastro de pedidos</a>
+                        <a class="dropdown-item" href="{% url 'cadastrar-produto' %}">Cadastrar produto</a>
                         <hr>
-                        <a class="dropdown-item" href="{% url 'cadastrar-status' %}">Cadastrar status</a>
-                        <hr>
-                        <a class="dropdown-item" href="{% url 'cadastrar-cor' %}">Cadastrar cor</a>                        
-                        <hr>
-                        <a class="dropdown-item" href="{% url 'cadastrar-movimentacao' %}">Cadastrar movimentacao</a>                        
+
+                        <a class="dropdown-item" href="{% url 'cadastrar-cor' %}">Cadastrar cor</a>
                         <hr>
                         <a class="dropdown-item" href="{% url 'cadastrar-tamanho' %}">Cadastrar tamanho</a>
                         <hr>
-                        <a class="dropdown-item" href="{% url 'cadastrar-produto' %}">Cadastrar produto</a>
-                                               
-                                       
+                        <a class="dropdown-item" href="{% url 'cadastrar-movimentacao' %}">Cadastrar
+                            movimentacao</a>
                     </div>
                 </li>
+
                 {% else %}
                 {% endif %}
 
@@ -103,27 +100,27 @@
                         <a class="dropdown-item" href="{% url 'listar-usuarios' %}">Lista de usuários</a>
                         <hr>
                         <a class="dropdown-item" href="{% url 'listar-pedidos' %}">Lista de pedidos</a>
-                        <hr>
-                        <a class="dropdown-item" href="{% url 'listar-produtos' %}">Lista de produtos</a>
                     </div>
                 </li>
                 {% else %}
                 {% endif %}
-
+                {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
+                        Estoque
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'listar-produtos' %}">Relação de produtos</a>
+                    </div>
+                </li>
+                {% else %}
+                {% endif%}
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Relatórios</a>
                 </li>
                 {% else %}
                 {% endif %}
-
-                {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Estoque</a>
-                </li>
-                {% else %}
-                {% endif%}
-
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
                 </li>
@@ -133,31 +130,31 @@
 
         {% comment %} Usuário logago {% endcomment %}
         {% if request.user.is_authenticated %}
-            <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">
-                    <h3>
-                        <i class="fas fa-user-alt" style="color:white"></i>
-                    </h3 </li> <li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
-                        <span id="username">{{ request.user }}</span>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <h3>
+                    <i class="fas fa-user-alt" style="color:white"></i>
+                </h3 </li> <li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="Listas" data-toggle="dropdown">
+                    <span id="username">{{ request.user }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{% url 'atualizar-dados' %}">
+                        <i class="fas fa-edit"></i>
+                        Editar perfil</a>
+                    <hr>
+                    <a class="dropdown-item" href="{% url 'alterar-senha' %}">
+                        <i class="fas fa-key"></i>
+                        Alterar senha</a>
+                    <hr>
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
                     </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{% url 'atualizar-dados' %}">
-                                <i class="fas fa-edit"></i>
-                                Editar perfil</a>
-                            <hr>
-                            <a class="dropdown-item" href="{% url 'alterar-senha' %}">
-                                <i class="fas fa-key"></i>
-                                Alterar senha</a>
-                            <hr>
-                            <a class="dropdown-item" href="{% url 'logout' %}">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Logout
-                            </a>
-                        </div>
-                </li>
-            </ul>
+                </div>
+            </li>
+        </ul>
         </li>
         </ul>
         </div?>
