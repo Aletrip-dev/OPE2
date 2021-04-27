@@ -111,17 +111,17 @@
 
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Relatórios</a>
-                </li>
-                {% else %}
-                {% endif %}
-
-                {% if request.user.is_authenticated %}
-                <li class="nav-item">
                     <a class="nav-link" href="#">Estoque</a>
                 </li>
                 {% else %}
                 {% endif%}
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Relatórios</a>
+                </li>
+                {% else %}
+                {% endif %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
@@ -185,6 +185,7 @@
     </div>
     
     {% endblock conteudo %}
+    
     {% else %}
     <div style="padding: 50px">
         <hr>
