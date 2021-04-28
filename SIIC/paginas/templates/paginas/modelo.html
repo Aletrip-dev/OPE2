@@ -67,6 +67,8 @@
 
                 {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
+
+
                     <a class="nav-link dropdown-toggle" href="#" id="Cadastros" data-toggle="dropdown">
                         Cadastros
                     </a>
@@ -82,7 +84,9 @@
                         <hr>
                         <a class="dropdown-item" href="{% url 'cadastrar-movimentacao' %}">Cadastrar
                             movimentacao</a>
+
                     </div>
+
                 </li>
 
                 {% else %}

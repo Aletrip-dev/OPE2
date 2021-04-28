@@ -16,10 +16,14 @@
 </p>
 
 <div class="container-fluid">
+    <style>
+    .dataTables_filter{
+            float: right !important;
+        }
+    </style>
     <hr>
-    <div class="table-responsive">
-        <table class="table table-hover table-condensed" id='tabela_listar_usuario'>
-
+    <div class="table table-responsive">
+        <table class="table table-hover" id='tabela_listar_usuario'>
             <thead class="thead-dark">
                 <tr>
                     <th>ID User</th>
@@ -35,7 +39,6 @@
 
             <tbody>
                 {% for Usuario in object_list %}
-
                 <tr>
                     <td>{{Usuario.pk}}</td>
                     <td>{{Usuario.username}}</td>
@@ -60,14 +63,19 @@
 
         </table>
         {% comment %} Datatable Jquery {% endcomment %}
+        {% block scripts %}
         <script>
-                {% block scripts %}
-
-            $(document).ready(function(){
-                          $('#tabela_listar_usuario').DataTable({
+            $(document).ready(function () {
+                $('#tabela_listar_usuario').DataTable({
+                    retrieve: true,
                     responsive: true,
+<<<<<<< HEAD
                     reversive: true,
                     // "bSort": false,
+=======
+                    searching: true,
+                    //"dom": '<l<t>ip<r>r<f>>',
+>>>>>>> master
                     "aaSorting": [],
                     "pageLength": 50,
                     "language": {
@@ -95,10 +103,11 @@
                         }
                     }
                 });
-            })
-        {% endblock scripts %}
+            });
+
         </script>
-        <hr>    
+        {% endblock scripts %}
+        <hr>
     </div>
 </div>
 {% endblock conteudo %}
