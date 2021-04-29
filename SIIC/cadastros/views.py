@@ -226,6 +226,7 @@ class ProdutoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
         context["titulo"] = "Editar produtos"
         context["subtitulo"] = "Editar produtos cadastrados no SIIC"
         context["botao"] = "Editar"
+        
         return context
 
 # ##################################### DELETE #################################
