@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'usuarios.apps.UsuariosConfig',
     'estoque.apps.EstoqueConfig',
 
-
+    'bootstrapform',
     'crispy_forms',
     # nomedoapp.apps.Nomedoappconfig
 ]

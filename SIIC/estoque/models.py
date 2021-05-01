@@ -58,13 +58,14 @@ class EstoqueItens(models.Model):
 
 
 # base para formulário para adicão de itens INLINE
-    # class EstoqueForm(forms.ModelForm):
-    #     class Meta:
-    #         model = Estoque
-    #         fields = '__all__'
+
+class EstoqueForm(forms.ModelForm):
+    class Meta:
+        model = Estoque
+        fields = '__all__'
 
 
-    # class EstoqueIntensForm(forms.ModelForm):
-    #     class Meta:
-    #         model = EstoqueItens
-    #         fields = '__all__'
+class EstoqueIntensForm(forms.ModelForm):
+    class Meta:
+        model = EstoqueItens
+        fields = '__all__'
