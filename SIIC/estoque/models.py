@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cadastros.models import Produto
 from django.urls.base import reverse_lazy
+from django import forms
 
 # Create your models here.
 
@@ -36,7 +37,7 @@ class Estoque(TimeStampedModel):
         ordering = ('-created',)
 
     def __str__(self):
-        return '{}{}{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
+        return '{}.{}.{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
 
     def nota_formatada(self):
         return str(self.nf).zfill(3)
@@ -54,3 +55,16 @@ class EstoqueItens(models.Model):
 
     def __str__(self):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
+
+
+# base para formulário para adicão de itens INLINE
+    # class EstoqueForm(forms.ModelForm):
+    #     class Meta:
+    #         model = Estoque
+    #         fields = '__all__'
+
+
+    # class EstoqueIntensForm(forms.ModelForm):
+    #     class Meta:
+    #         model = EstoqueItens
+    #         fields = '__all__'
