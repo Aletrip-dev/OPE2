@@ -43,4 +43,4 @@ def estoque_entrada_add(request):
         formset = item_estoque_formset(instance=estoque_form, prefix='estoque')
 
     context = {'form': form, 'formset': formset}
-    return render(request, template_name)
+    return render(request, template_name, context)
