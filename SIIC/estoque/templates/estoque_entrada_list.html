@@ -1,0 +1,46 @@
+{% extends 'paginas/modelo.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<div class="container" style="padding-top: 20px">
+    <h3>Entrada de itens no estoque
+        <span class="float-right">
+            <a href="{%url 'cadastrar-produto' %}">
+                <button type="button" class="btn btn-primary">
+                    <span class="fa fa-plus"></span> Adicionar
+                </button>
+            </a>
+        </span>
+    </h3>
+<p></p>
+    {% if object_list %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Nota Fiscal</th>
+                <th>Data</th>
+                <th>Funcionário</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'detalhar-itens' object.pk%}">{{ object }}</a>
+                </td>
+                <td>{{ object.nota_formatada }}</td>
+                <td>{{ object.created }}</td>
+                <td>{{ object.funcionario }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="alert alert-warning">Lista vazia</p>
+    {% endif %}
+</div>
+
+
+{% endblock conteudo %}

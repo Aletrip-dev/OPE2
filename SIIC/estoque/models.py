@@ -2,13 +2,15 @@ from usuarios.models import Usuario
 from django.db import models
 from django.contrib.auth.models import User
 from cadastros.models import Produto
+from django.urls.base import reverse_lazy
+
 # Create your models here.
 
 # classe para obter data e hora da criação e modificação
 
 MOVIMENTO = (
     ('e', 'entrada'),
-    ('s', 'saida')
+    ('s', 'saida'),
 )
 
 
@@ -34,11 +36,15 @@ class Estoque(TimeStampedModel):
         ordering = ('-created',)
 
     def __str__(self):
-        return str(self.pk)
+        return '{}{}{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
+
+    def nota_formatada(self):
+        return str(self.nf).zfill(3)
 
 
 class EstoqueItens(models.Model):
-    estoque = models.ForeignKey(Estoque, on_delete=models.CASCADE)
+    estoque = models.ForeignKey(
+        Estoque, on_delete=models.CASCADE, related_name='estoques')
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
     saldo = models.PositiveIntegerField()
