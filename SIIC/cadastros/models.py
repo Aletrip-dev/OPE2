@@ -91,6 +91,14 @@ class Produto(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy("produto:detalhar-produto", kwargs={"pk": self.pk})
+    # json
+
+    def to_dict_json(self):
+        return {
+            'pk': self.pk,
+            'produto': self.nome_produto,
+            'estoque': self.quantidade_disponivel,
+        }
 
 
 class Item(models.Model):
