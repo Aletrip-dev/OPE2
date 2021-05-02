@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'estoque.apps.EstoqueConfig',
 
     'bootstrapform',
+    'widget_tweaks',
     'crispy_forms',
     # nomedoapp.apps.Nomedoappconfig
 ]
