@@ -40,7 +40,9 @@ class Estoque(TimeStampedModel):
         return '{}.{}.{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
 
     def nota_formatada(self):
-        return str(self.nf).zfill(3)
+        if self.nf:
+            return str(self.nf).zfill(3)
+        return '---'
 
 
 class EstoqueItens(models.Model):
@@ -59,13 +61,4 @@ class EstoqueItens(models.Model):
 
 # base para formulário para adicão de itens INLINE
 
-class EstoqueForm(forms.ModelForm):
-    class Meta:
-        model = Estoque
-        fields = '__all__'
 
-
-class EstoqueIntensForm(forms.ModelForm):
-    class Meta:
-        model = EstoqueItens
-        fields = '__all__'

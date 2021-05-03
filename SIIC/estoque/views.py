@@ -1,8 +1,10 @@
 from django.forms import inlineformset_factory
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, resolve_url
-from .models import Estoque, EstoqueForm, EstoqueIntensForm, EstoqueItens
+from .models import Estoque, EstoqueItens
+from .forms import EstoqueIntensForm, EstoqueForm
 from cadastros.models import Produto
+from cadastros.forms import ProdutoForm
 
 
 def estoque_entrada_list(request):
@@ -20,12 +22,13 @@ def estoque_entrada_detalhes(request, pk):
 
 
 def dar_baixa_estoque(form):
+    # Pega os produtos a partir da instância do formulário (Estoque).
     produtos = form.estoques.all()
     for item in produtos:
         produto = Produto.objects.get(pk=item.produto.pk)
         produto.estoque = item.saldo
         produto.save()
-    print('Estoque atualizado com sucesso!')
+    print('Estoque atualizado com sucesso.')
 
 
 def estoque_entrada_add(request):

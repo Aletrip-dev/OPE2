@@ -1,35 +1,50 @@
-//BLOCO FUNCIONAL
-//Botões para adicionar mais iten
-{ % comment % }
 $(document).ready(function() {
-    //insere classe no primeiro item
+    // Insere classe no primeiro item de produto
     $('#id_estoque-0-produto').addClass('clProduto');
     $('#id_estoque-0-quantidade').addClass('clQuantidade');
+    // Desabilita o primeiro campo 'Saldo'
+    $('#id_estoque-0-saldo').prop('type', 'hidden')
+        // Cria um span para mostrar o saldo na tela.
+    $('label[for="id_estoque-0-saldo"]').append('<span id="id_estoque-0-saldo-span" class="lead" style="padding-left: 10px; color: blue; padding-right: 30px;"></span>')
+        // Cria um campo com o estoque inicial.
+    $('label[for="id_estoque-0-saldo"]').append('<input id="id_estoque-0-inicial" class="form-control" type="hidden" />')
+        // Select2
+        //$('.clProduto').select2()
+});
 
-    $('#add-item').click(function(ev) {
-        ev.preventDefault();
-        var count = $('#estoque').children().length;
-        var tmplMarkup = $('#item-estoque').html();
-        var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
-        $('div#estoque').append(compiledTmpl);
-        // atualização da contagem
-        $('#id_estoque-TOTAL_FORMS').attr('value', count + 1);
+$('#add-item').click(function(ev) {
+    ev.preventDefault();
+    var count = $('#estoque').children().length;
+    var tmplMarkup = $('#item-estoque').html();
+    var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
+    $('div#estoque').append(compiledTmpl);
 
-        //animação do scroll
-        $('html, body').animate({
-            scrollTop: $('#add-item').position().top - 200
-        }, 800);
+    // update form count
+    $('#id_estoque-TOTAL_FORMS').attr('value', count + 1);
 
-        //Adicionando valores
-        $('#id_estoque-' + (count) + '-produto').addClass('clProduto');
-        $('#id_estoque-' + (count) + '-quantidade').addClass('clQuantidade');
+    // Desabilita o campo 'Saldo'
+    $('#id_estoque-' + (count) + '-saldo').prop('type', 'hidden')
 
-    });
+    // some animate to scroll to view our new form
+    $('html, body').animate({
+        scrollTop: $("#add-item").position().top - 200
+    }, 800);
+
+    $('#id_estoque-' + (count) + '-produto').addClass('clProduto');
+    $('#id_estoque-' + (count) + '-quantidade').addClass('clQuantidade');
+
+    // Cria um span para mostrar o saldo na tela.
+    $('label[for="id_estoque-' + (count) + '-saldo"]').append('<span id="id_estoque-' + (count) + '-saldo-span" class="lead" style="padding-left: 10px; color: blue; padding-right: 30px;"></span>')
+        // Cria um campo com o estoque inicial.
+    $('label[for="id_estoque-' + (count) + '-saldo"]').append('<input id="id_estoque-' + (count) + '-inicial" class="form-control" type="hidden" />')
+        // Select2
+    $('.clProduto').select2()
 });
 
 let estoque
 let saldo
 let campo
+let campo2
 let quantidade
 
 $(document).on('change', '.clProduto', function() {
@@ -63,11 +78,11 @@ $(document).on('change', '.clQuantidade', function() {
     campo_estoque_inicial = $(this).attr('id').replace('quantidade', 'inicial')
     estoque_inicial = $('#' + campo_estoque_inicial).val()
     saldo = Number(quantidade) + Number(estoque_inicial)
+        // Desabilita o 'Saldo'
+    $('#' + campo).prop('type', 'hidden')
+        // Atribui o saldo ao campo 'saldo'
     $('#' + campo).val(saldo)
     campo2 = $(this).attr('id').replace('quantidade', 'saldo-span')
         // Atrubui o saldo ao campo 'id_estoque-x-saldo-span'
     $('#' + campo2).text(saldo)
-}); { % endcomment % }
-
-// Link JS externo
-//<script src="{% static 'js/estoque_entrada.js' %}"></script>
+});

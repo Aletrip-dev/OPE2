@@ -38,5 +38,5 @@ urlpatterns = [
     path('listar/pedidos/', PedidoList.as_view(), name='listar-pedidos'),
     path('listar/produtos/', ProdutoList.as_view(), name='listar-produtos'),
     path('detalhes/produtos/<int:pk>/', ProdutoDetalhes, name='detalhar-produto'),
-    path('<int:pk>/json/', produto_json, name='produto_json'),
+    path('produto/<int:pk>/json/', produto_json, name='produto_json'),
 ]
