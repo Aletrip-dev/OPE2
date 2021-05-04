@@ -4,7 +4,9 @@ from .models import EstoqueItens, Estoque
 
 # Register your models here.
 
-#inclusão linear de itens
+# inclusão linear de itens
+
+
 class EstoqueItensInline(TabularInline):
     model = EstoqueItens
     extra = 0
