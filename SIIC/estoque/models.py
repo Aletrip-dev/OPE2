@@ -41,7 +41,7 @@ class Estoque(TimeStampedModel):
 
     def nota_formatada(self):
         if self.nf:
-            return str(self.nf).zfill(3)
+            return str(self.nf).zfill(6)
         return '---'
 
 
@@ -60,5 +60,3 @@ class EstoqueItens(models.Model):
 
 
 # base para formulário para adicão de itens INLINE
-
-

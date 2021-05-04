@@ -9,7 +9,7 @@ $(document).ready(function() {
         // Cria um campo com o estoque inicial.
     $('label[for="id_estoque-0-saldo"]').append('<input id="id_estoque-0-inicial" class="form-control" type="hidden" />')
         // Select2
-        //$('.clProduto').select2()
+    $('.clProduto').select2()
 });
 
 $('#add-item').click(function(ev) {
@@ -85,4 +85,11 @@ $(document).on('change', '.clQuantidade', function() {
     campo2 = $(this).attr('id').replace('quantidade', 'saldo-span')
         // Atrubui o saldo ao campo 'id_estoque-x-saldo-span'
     $('#' + campo2).text(saldo)
+});
+
+
+$('#form').bind('submit', false);
+
+$('button#submit').click(function() {
+    $('#form').submit();
 });

@@ -8,5 +8,5 @@ urlpatterns = [
     path('estoque/listar_entradas', estoque_entrada_list,
          name='estoque_entrada_list'),
     path('item_detalhe/<int:pk>/', estoque_entrada_detalhes, name='detalhar-itens'),
-    path('estoque/entrada/add', estoque_entrada_add, name='form-entrada-itens'),
+    path('add/', estoque_entrada_add, name='estoque_entrada_add'),
 ]
