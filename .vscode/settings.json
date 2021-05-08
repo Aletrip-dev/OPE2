@@ -11,5 +11,6 @@
     "python.testing.unittestEnabled": false,
     "git.ignoreLimitWarning": true,
     "python.pythonPath": "venv/bin/python",
-    "python.testing.promptToConfigure": false
+    "python.testing.promptToConfigure": false,
+    "editor.renderWhitespace": false,
 }
