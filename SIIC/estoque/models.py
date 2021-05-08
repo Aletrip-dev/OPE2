@@ -28,7 +28,7 @@ class TimeStampedModel(models.Model):
 
 class Estoque(TimeStampedModel):
     funcionario = models.ForeignKey(
-        Usuario, verbose_name="Usuário", on_delete=models.CASCADE)
+        Usuario, verbose_name="Usuário", on_delete=models.CASCADE, blank=True)
     nf = models.PositiveIntegerField(
         null=False, blank=False, verbose_name='Nota Fiscal')
     movimento = models.CharField(max_length=1, choices=MOVIMENTO)
@@ -37,7 +37,9 @@ class Estoque(TimeStampedModel):
         ordering = ('-created',)
 
     def __str__(self):
-        return '{}.{}.{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
+        if self.nf:
+            return '{}.{}.{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
+        return '{}.0000.{}'.format(self.pk, self.created.strftime('%d%m%Y'))
 
     def nota_formatada(self):
         if self.nf:
@@ -73,7 +75,7 @@ class EstoqueItens(models.Model):
         Estoque, on_delete=models.CASCADE, related_name='estoques')
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
-    saldo = models.PositiveIntegerField()
+    saldo = models.PositiveIntegerField(verbose_name='Estoque: ')
 
     class Meta:
         ordering = ('pk',)
