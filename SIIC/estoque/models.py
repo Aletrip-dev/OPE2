@@ -76,6 +76,9 @@ class EstoqueItens(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
     saldo = models.PositiveIntegerField(verbose_name='Estoque: ')
+    preco_unit = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    valor_item = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True)
 
     class Meta:
         ordering = ('pk',)
