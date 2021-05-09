@@ -42,13 +42,13 @@ def dar_baixa_estoque(form):
     print('Estoque atualizado com sucesso.')
 
 
-def calcula_valor_item(custo, quantidade):
-    # Pega os produtos a partir da instância do formulário (Estoque).
-    produtos = form.estoques.all()
-    total = 0
-    for item in produtos:
-        total += Produto.preco_unitario
-    print(total)
+# def calcula_valor_item(custo, quantidade):
+#     # Pega os produtos a partir da instância do formulário (Estoque).
+#     produtos = form.estoques.all()
+#     total = 0
+#     for item in produtos:
+#         total += Produto.preco_unitario
+#     print(total)
 
 
 def estoque_add(request, template_name, movimento, url):
@@ -81,18 +81,6 @@ def estoque_add(request, template_name, movimento, url):
         formset = item_estoque_formset(instance=estoque_form, prefix='estoque')
     context = {'form': form, 'formset': formset}
     return context
-
-# Alterar o botão apagar
-
-
-def add_fields(self, form, index):
-    estoque_add().add_fields(form, index)
-    if self.can_delete:
-        form.fields[DELETION_FIELD_NAME] = forms.BooleanField(
-            label=_('Delete'),
-            required=False,
-            widget=forms.HiddenInput
-        )
 
 
 def estoque_entrada_add(request):

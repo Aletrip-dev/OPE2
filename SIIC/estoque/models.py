@@ -73,15 +73,36 @@ class EstoqueSaida(Estoque):
 class EstoqueItens(models.Model):
     estoque = models.ForeignKey(
         Estoque, on_delete=models.CASCADE, related_name='estoques')
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    quantidade = models.PositiveIntegerField()
+    produto = models.ForeignKey(
+        Produto, on_delete=models.CASCADE, verbose_name='Produto: ')
+    quantidade = models.PositiveIntegerField(verbose_name='Qtd.: ')
     saldo = models.PositiveIntegerField(verbose_name='Estoque: ')
-    preco_unit = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    preco_unit = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True, null=True)
     valor_item = models.DecimalField(
-        max_digits=5, decimal_places=2, blank=True)
+        max_digits=5, decimal_places=2, blank=True, null=True)
 
     class Meta:
         ordering = ('pk',)
 
     def __str__(self):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
+
+    def preco_unitario():
+        pass
+
+
+# bnull = dict(blank=True, null=True)
+
+
+# class Retirada(models.Model):
+#     item = models.ForeignKey(Item, related_name='Itens',
+#                              on_delete=models.CASCADE, **bnull)
+#     descricao = models.CharField('Descricao', max_length=120, **bnull)
+#     quantidade = models.FloatField('Quantidade retirada', **bnull)
+
+#     def save(self, force_insert=False, force_update=False, *args, **kwargs):
+#         # Salve os dados
+#         self.item.quantidade_atual -= self.quantidade
+#         self.item.save()
+#         super(Retirada, self).save(force_insert, force_update, *args, **kwargs)
