@@ -36,7 +36,7 @@ class Produto(models.Model):
     descricao_produto = models.CharField(
         max_length=255, verbose_name='Descrição do produto', blank=True)
     preco_unitario = models.DecimalField(
-        max_digits=6, decimal_places=2, verbose_name='Preço unitário')
+        max_digits=6, decimal_places=2, verbose_name='Preço unitário', blank=True, null=True)
     quantidade_disponivel = models.PositiveIntegerField(
         verbose_name='Quantidade disponíve')
     tamanho_produto = models.ForeignKey(

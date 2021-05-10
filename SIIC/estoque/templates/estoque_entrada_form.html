@@ -73,6 +73,7 @@
                         <div id="item-{{ forloop.counter0 }}" class="form-group">
                             {{ item_estoque_form.produto|bootstrap }}
                             {{ item_estoque_form.quantidade|bootstrap }}
+                            {{ item_estoque_form.preco_unit|bootstrap }}
                             {{ item_estoque_form.saldo|bootstrap }}
                             <span id="apagar_item">{{ item_estoque_form.DELETE|bootstrap }} </span>
                         </div>
