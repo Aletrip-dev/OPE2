@@ -68,3 +68,8 @@ body {
 .jumbotron {
     max-height: 50%;
 }
+
+#logo_small {
+    _background: none;
+    filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='img/LogoSmalFashion.png', sizingMethod='scale');
+}

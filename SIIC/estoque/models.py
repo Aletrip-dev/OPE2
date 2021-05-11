@@ -5,6 +5,8 @@ from cadastros.models import Produto
 from django.urls.base import reverse_lazy
 from django import forms
 from .manager import EstoqueEntradaManager, EstoqueSaidaManager
+from django.db.models import F, ExpressionWrapper, DecimalField
+
 # Create your models here.
 
 # classe para obter data e hora da criação e modificação
@@ -88,21 +90,8 @@ class EstoqueItens(models.Model):
     def __str__(self):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
 
-    def preco_unitario():
-        pass
-
-
-# bnull = dict(blank=True, null=True)
-
-
-# class Retirada(models.Model):
-#     item = models.ForeignKey(Item, related_name='Itens',
-#                              on_delete=models.CASCADE, **bnull)
-#     descricao = models.CharField('Descricao', max_length=120, **bnull)
-#     quantidade = models.FloatField('Quantidade retirada', **bnull)
-
-#     def save(self, force_insert=False, force_update=False, *args, **kwargs):
-#         # Salve os dados
-#         self.item.quantidade_atual -= self.quantidade
-#         self.item.save()
-#         super(Retirada, self).save(force_insert, force_update, *args, **kwargs)
+    # realiza o calcula do valor do item e atribui ao campo
+    def calcula_total(self, *args, **kwargs):
+        self.total = self.preco_unit * self.quantidade
+        self.valor_item = self.total
+        return super(EstoqueItens, self).save(*args, **kwargs)

@@ -41,6 +41,7 @@ def dar_baixa_estoque(form):
         produto = Produto.objects.get(pk=item.produto.pk)
         produto.quantidade_disponivel = item.saldo
         produto.preco_unitario = item.preco_unit
+        produto.valor_item = item.calcula_total() #calcula o valor do item antes de salvar
         produto.save()
     print('Estoque atualizado com sucesso.')
 
@@ -89,7 +90,7 @@ def estoque_entrada_add(request):
     template_name = 'estoque_entrada_form.html'
     movimento = 'e'
     url = 'detalhar-itens'
-    context = estoque_add(request, template_name, movimento, url)
+    context = estoque_add(request, template_name, movimento, url,)
     if context.get('pk'):
         return HttpResponseRedirect(resolve_url(url, context.get('pk')))
     return render(request, template_name, context)

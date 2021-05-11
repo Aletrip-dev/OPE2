@@ -23,6 +23,7 @@
                 <th>Nota Fiscal</th>
                 <th>Data</th>
                 <th>Funcionário</th>
+                <th>Total</th>
                 <th>Detalhes</th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                 <td>{{ object.nota_formatada }}</td>
                 <td>{{ object.created }}</td>
                 <td>{{ object.funcionario }}</td>
+                <td>{{ obj.EstoqueItens.valor_item}}</td>
                 <td>
                     <a href="{%url detalhes object.pk%}">
                         <button type="button" class="btn btn-info">
