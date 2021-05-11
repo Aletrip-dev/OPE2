@@ -23,7 +23,7 @@
                 <th>Nota Fiscal</th>
                 <th>Data</th>
                 <th>Funcionário</th>
-                <th>Total</th>
+                <th>Total do item</th>
                 <th>Detalhes</th>
             </tr>
         </thead>
@@ -36,7 +36,11 @@
                 <td>{{ object.nota_formatada }}</td>
                 <td>{{ object.created }}</td>
                 <td>{{ object.funcionario }}</td>
-                <td>{{ obj.EstoqueItens.valor_item}}</td>
+
+                    {% for obj in object.estoques.all %}
+                    <td>R$ {{obj.valor_item}}</td>
+                    {% endfor %}
+
                 <td>
                     <a href="{%url detalhes object.pk%}">
                         <button type="button" class="btn btn-info">

@@ -6,6 +6,7 @@ from django.urls.base import reverse_lazy
 from django import forms
 from .manager import EstoqueEntradaManager, EstoqueSaidaManager
 from django.db.models import F, ExpressionWrapper, DecimalField
+from decimal import *
 
 # Create your models here.
 
@@ -80,9 +81,9 @@ class EstoqueItens(models.Model):
     quantidade = models.PositiveIntegerField(verbose_name='Qtd.: ')
     saldo = models.PositiveIntegerField(verbose_name='Estoque: ')
     preco_unit = models.DecimalField(
-        max_digits=5, decimal_places=2, blank=True, null=True)
+        max_digits=9, decimal_places=2, blank=True, null=True)
     valor_item = models.DecimalField(
-        max_digits=5, decimal_places=2, blank=True, null=True)
+        max_digits=9, decimal_places=2, blank=True, null=True)
 
     class Meta:
         ordering = ('pk',)
@@ -92,6 +93,6 @@ class EstoqueItens(models.Model):
 
     # realiza o calcula do valor do item e atribui ao campo
     def calcula_total(self, *args, **kwargs):
-        self.total = self.preco_unit * self.quantidade
+        self.total = round(self.preco_unit * self.quantidade, 2)
         self.valor_item = self.total
         return super(EstoqueItens, self).save(*args, **kwargs)

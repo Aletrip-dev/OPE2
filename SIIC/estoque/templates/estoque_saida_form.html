@@ -26,56 +26,61 @@
 </style>
 {% endblock css %}
 <P></P>
-<h1 style="text-align: center;">SAÍDA DE ITENS</h1>
 
-{% comment %} CONTEUDO {% endcomment %}
 <div class="container">
-    <div class="row offset-md-1">
+
+    <h1 style="text-align: center;">SAÍDA DE ITENS</h1>
+
+    {% comment %} CONTEUDO {% endcomment %}
+    <div class="row">
 
         <form method="POST" novalidate style="padding-bottom: 10px;">
             {% csrf_token %}
-            <H4>ESTOQUE - ENTRADA: </H4>
-            <hr>
-            <div class="form-inline">
+            <H4>ESTOQUE - SAÍDA: </H4>
+            <hr style="margin: 5px;">
 
+            <div class="form-inline" style="margin-bottom: 5px;">
                 {% for field in form.visible_fields %}
-                
-                <div class="form-group{% if field.errors %} has-error {% endif%}">
-                    <label for="{{ field.id_for_label }}">
-                        {% if field.field.required %}
-                        <span style="margin-left: 10px;" class="required">{{ field.label }}</span>
-                        {% else %}
-                        <span style="margin-left: 10px;">{{ field.label }}</span>
-                        {% endif %}
-                    </label>
-                    <span style="margin-left: 10px;">{% render_field field class="form-control" %}</span>
-                    {% for error in field.errors %}
-                    <span class="text-muted">{{ error }}</span>
+                <div style="margin: 5px;" class="form-group{% if field.errors %} has-error {% endif%}">
+                    <div class="input-group mb-1" style="margin: 5px;">
+                        <label class="label label-primary" for="{{ field.id_for_label }}">
+                            <span class="input-group-text" id="basic-addon1">
+                                {% if field.field.required %}
+                                <span style="margin-left: 10px;" class="required">{{ field.label }}</span>
+                                {% else %}
+                                <span style="margin-left: 10px;">{{ field.label }}</span>
+                                {% endif %}
+                            </span>
+                            <span style="margin-left: 10px; color: #ccccc;"><i class="fas fa-chevron-right"></i></span>
+                        </label>
+                        <span style="margin-left: 10px;">{% render_field field class="form-control" %}</span>
+                        {% for error in field.errors %}
+                        <span class="text-muted">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                     {% endfor %}
+                    {{ formset.management_form }}
                 </div>
-                {% endfor %}
-                {{ formset.management_form }}
             </div>
 
+            <hr>
 
             <h5>PRODUTOS: </h3>
                 <hr>
-                <div align="center">
-                    <div id="estoque" class="form-inline form-flex">
-                        {% for item_estoque_form in formset %}
-                        <div class="inlineform">
-                            <div id="item-{{ forloop.counter0 }}" class="form-group">
-                                {{ item_estoque_form.produto|bootstrap }}
-                                {{ item_estoque_form.quantidade|bootstrap }}
-                                {{ item_estoque_form.saldo|bootstrap }}
-                                <span id="apagar_item">{{ item_estoque_form.DELETE|bootstrap }} </span>
-                            </div>
+                <div id="estoque" class="form-inline form-flex" style="padding: 10px;">
+                    {% for item_estoque_form in formset %}
+                    <div class="inlineform">
+                        <div id="item-{{ forloop.counter0 }}" class="form-group">
+                            {{ item_estoque_form.produto|bootstrap }}
+                            {{ item_estoque_form.quantidade|bootstrap }}
+                            {{ item_estoque_form.preco_unit|bootstrap }}
+                            {{ item_estoque_form.saldo|bootstrap }}
+                            <span id="apagar_item">{{ item_estoque_form.DELETE|bootstrap }} </span>
                         </div>
-                        {% endfor %}
-
                     </div>
-                    <hr>
+                    {% endfor %}
                 </div>
+                <hr>
 
                 <div class="col-sm-12">
                     <div class="row float-left">
