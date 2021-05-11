@@ -15,85 +15,112 @@
     .form-control {
         margin: 5px;
     }
+
+    .form-inline.col-sm-12 {}
+
+    .checkbox {
+        color: grey !important;
+        margin-left: 20px !important;
+        text-indent: 7px;
+    }
 </style>
 {% endblock css %}
+<P></P>
 
-<h1 style="text-align: center;">Entrada de itens no estoque</h1>
+<div class="container">
 
-{% comment %} CONTEUDO {% endcomment %}
-<div class="container container-fluid">
-    <div class="row offset-md-1">
+    <h1 style="text-align: center;">ENTRADA DE ITENS</h1>
 
-        <form method="POST" novalidate style="padding-bottom: 20px;">
+    {% comment %} CONTEUDO {% endcomment %}
+    <div class="row">
+
+        <form method="POST" novalidate style="padding-bottom: 10px;">
             {% csrf_token %}
-            <legend style="border-bottom: 1px solid #e5e5e5;">Estoque Entrada: </legend>
+            <H4>ESTOQUE - ENTRADA: </H4>
+            <hr style="margin: 5px;">
 
-            <div class="form-inline col-sm-12 offset-md-1" align="center">
+            <div class="form-inline" style="margin-bottom: 5px;">
                 {% for field in form.visible_fields %}
-                <div class="form-group{% if field.errors %} has-error {% endif%}">
-                    <label for="{{ field.id_for_label }}">
-                        {% if field.field.required %}
-                        <span style="margin-left: 10px;" class="required">{{ field.label }}</span>
-                        {% else %}
-                        <span style="margin-left: 10px;">{{ field.label }}</span>
-                        {% endif %}
-                    </label>
-                    <span style="margin-left: 10px;">{% render_field field class="form-control" %}</span>
-                    {% for error in field.errors %}
-                    <span class="text-muted">{{ error }}</span>
+                <div style="margin: 5px;" class="form-group{% if field.errors %} has-error {% endif%}">
+                    <div class="input-group mb-1" style="margin: 5px;">
+                        <label class="label label-primary" for="{{ field.id_for_label }}">
+                            <span class="input-group-text" id="basic-addon1">
+                                {% if field.field.required %}
+                                <span style="margin-left: 10px;" class="required">{{ field.label }}</span>
+                                {% else %}
+                                <span style="margin-left: 10px;">{{ field.label }}</span>
+                                {% endif %}
+                            </span>
+                            <span style="margin-left: 10px; color: #ccccc;"><i class="fas fa-chevron-right"></i></span>
+                        </label>
+                        <span style="margin-left: 10px;">{% render_field field class="form-control" %}</span>
+                        {% for error in field.errors %}
+                        <span class="text-muted">{{ error }}</span>
+                        {% endfor %}
+                    </div>
                     {% endfor %}
+                    {{ formset.management_form }}
                 </div>
-                {% endfor %}
-                {{ formset.management_form }}
             </div>
 
+            <hr>
 
-            <legend style="border-bottom: 2px solid #e5e5e5;">Produtos: </legend>
-
-            <div align="center">
-                <div id="estoque" class="form-inline col-sm-12">
+            <h5>PRODUTOS: </h3>
+                <hr>
+                <div id="estoque" class="form-inline form-flex" style="padding: 10px;">
                     {% for item_estoque_form in formset %}
-                    <div id="item-{{ forloop.counter0 }}" class="form-group">
-                        {{ item_estoque_form|bootstrap }}
+                    <div class="inlineform">
+                        <div id="item-{{ forloop.counter0 }}" class="form-group">
+                            {{ item_estoque_form.produto|bootstrap }}
+                            {{ item_estoque_form.quantidade|bootstrap }}
+                            {{ item_estoque_form.preco_unit|bootstrap }}
+                            {{ item_estoque_form.saldo|bootstrap }}
+                            <span id="apagar_item">{{ item_estoque_form.DELETE|bootstrap }} </span>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-
-            <div class="col-sm-12">
-                <div class="row float-left">
-                    <span id="add-item" class="btn btn-info" style="margin-top: 10px;">
-                        <i class="fa fa-plus"></i> Adicionar
-                    </span>
-                </div>
                 <hr>
-                <div class="row float-right">
-                    <div class="col-sm-12" style="margin-top: 50px;">
-                        <div class="form-inline buttons">
-                            <button class="btn btn-primary" value="Save">
-                                <i class="fa fa-floppy-o"></i>
-                                Salvar
-                            </button>
-                            <a style="margin-left: 10px;" href="{% url 'estoque_entrada_list' %}"
-                                class="btn btn-danger">
-                                <i class="fa fa-times"></i>
-                                Cancelar
-                            </a>
+
+                <div class="col-sm-12">
+                    <div class="row float-left">
+                        <span id="add-item" class="btn btn-info" style="margin-top: 10px;">
+                            <i class="fa fa-plus"></i> Adicionar
+                        </span>
+                    </div>
+
+                    <div class="row float-right">
+                        <div class="col-sm-12" style="margin-top: 50px;">
+                            <div class="form-inline buttons">
+                                <button class="btn btn-primary" value="Save">
+                                    <i class="fa fa-floppy-o"></i>
+                                    Salvar
+                                </button>
+                                <a style="margin-left: 10px;" href="{% url 'estoque_entrada_list' %}"
+                                    class="btn btn-danger">
+                                    <i class="fa fa-times"></i>
+                                    Cancelar
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>
 {% endblock conteudo %}
 
 {% block scripts %}
+
+
 {% comment %} Link JS externo {% endcomment %}
+
 <script src="{% static 'js/estoque_entrada.js' %}"></script>
 <script type="text/html" id="item-estoque">
     <div id="item-__prefix__" class="form-group">
         {{ formset.empty_form|bootstrap }}
     </div>
 </script>
+
+
 {% endblock scripts %}

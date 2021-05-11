@@ -5,6 +5,9 @@ from cadastros.models import Produto
 from django.urls.base import reverse_lazy
 from django import forms
 from .manager import EstoqueEntradaManager, EstoqueSaidaManager
+from django.db.models import F, ExpressionWrapper, DecimalField
+from decimal import Decimal
+from django.db.models import Sum
 # Create your models here.
 
 # classe para obter data e hora da criação e modificação
@@ -28,7 +31,7 @@ class TimeStampedModel(models.Model):
 
 class Estoque(TimeStampedModel):
     funcionario = models.ForeignKey(
-        Usuario, verbose_name="Usuário", on_delete=models.CASCADE)
+        Usuario, verbose_name="Usuário", on_delete=models.CASCADE, blank=True)
     nf = models.PositiveIntegerField(
         null=False, blank=False, verbose_name='Nota Fiscal')
     movimento = models.CharField(max_length=1, choices=MOVIMENTO)
@@ -37,7 +40,9 @@ class Estoque(TimeStampedModel):
         ordering = ('-created',)
 
     def __str__(self):
-        return '{}.{}.{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
+        if self.nf:
+            return '{}.{}.{}'.format(self.pk, self.nf, self.created.strftime('%d%m%Y'))
+        return '{}.0000.{}'.format(self.pk, self.created.strftime('%d%m%Y'))
 
     def nota_formatada(self):
         if self.nf:
@@ -71,12 +76,31 @@ class EstoqueSaida(Estoque):
 class EstoqueItens(models.Model):
     estoque = models.ForeignKey(
         Estoque, on_delete=models.CASCADE, related_name='estoques')
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    quantidade = models.PositiveIntegerField()
-    saldo = models.PositiveIntegerField()
+    produto = models.ForeignKey(
+        Produto, on_delete=models.CASCADE, verbose_name='Produto: ')
+    quantidade = models.PositiveIntegerField(verbose_name='Qtd.: ')
+    saldo = models.PositiveIntegerField(verbose_name='Estoque: ')
+    preco_unit = models.DecimalField(
+        max_digits=9, decimal_places=2, blank=True, null=True)
+    valor_item = models.DecimalField(
+        max_digits=9, decimal_places=2, default=0)
+    valor_item_total = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0)
 
     class Meta:
         ordering = ('pk',)
 
     def __str__(self):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
+
+    # realiza o calcula do valor do item e atribui ao campo
+    def calcula_total(self, *args, **kwargs):
+        self.total = round(self.preco_unit * self.quantidade, 2)
+        self.valor_item = self.total
+        return super(EstoqueItens, self).save(*args, **kwargs)
+
+    def calcula_total_geral_item(self, *args, **kwargs):
+        self.total = self.preco_unit * self.quantidade
+        self.valor_item = self.total
+        self.valor_item_total += self.valor_item
+        return super(EstoqueItens, self).save(*args, **kwargs)
