@@ -81,7 +81,7 @@ class EstoqueItens(models.Model):
     quantidade = models.PositiveIntegerField(verbose_name='Qtd.: ')
     saldo = models.PositiveIntegerField(verbose_name='Estoque: ')
     preco_unit = models.DecimalField(
-        max_digits=9, decimal_places=2, blank=True, null=True)
+        max_digits=9, decimal_places=2, blank=True, null=True, verbose_name='R$/Unid.')
     valor_item = models.DecimalField(
         max_digits=9, decimal_places=2, default=0)
     valor_item_total = models.DecimalField(
