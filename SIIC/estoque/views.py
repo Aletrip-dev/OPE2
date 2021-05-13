@@ -43,17 +43,9 @@ def dar_baixa_estoque(form):
         produto.preco_unitario = item.preco_unit
         # calcula o valor do item antes de salvar
         produto.valor_item = item.calcula_total()
-        # produto.valor_item_total = item.calcula_total_geral_item()
+        # produto.valor_item_total = item.total_geral_item()
         produto.save()
     print('Estoque atualizado com sucesso.')
-
-    # def calcula_valor_item(custo, quantidade):
-    #     # Pega os produtos a partir da instância do formulário (Estoque).
-    #     produtos = form.estoques.all()
-    #     total = 0
-    #     for item in produtos:
-    #         total += produto.preco_unitario
-    #     print(total)
 
 
 def estoque_add(request, template_name, movimento, url):

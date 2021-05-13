@@ -1,3 +1,4 @@
+from django.db.models.expressions import Value
 from usuarios.models import Usuario
 from django.db import models
 from django.contrib.auth.models import User
@@ -5,7 +6,7 @@ from cadastros.models import Produto
 from django.urls.base import reverse_lazy
 from django import forms
 from .manager import EstoqueEntradaManager, EstoqueSaidaManager
-from django.db.models import F, ExpressionWrapper, DecimalField
+from django.db.models import F, ExpressionWrapper, DecimalField, Max, Sum, Avg, Min
 from decimal import Decimal
 from django.db.models import Sum
 # Create your models here.
@@ -48,6 +49,7 @@ class Estoque(TimeStampedModel):
         if self.nf:
             return str(self.nf).zfill(6)
         return '---'
+
 
 # cria tabela virtual somente com as entradas
 
@@ -99,8 +101,19 @@ class EstoqueItens(models.Model):
         self.valor_item = self.total
         return super(EstoqueItens, self).save(*args, **kwargs)
 
-    def calcula_total_geral_item(self, *args, **kwargs):
-        self.total = self.preco_unit * self.quantidade
-        self.valor_item = self.total
-        self.valor_item_total += self.valor_item
-        return super(EstoqueItens, self).save(*args, **kwargs)
+    # def calcula_total_geral_item(self, *args, **kwargs):
+    #     self.soma = 0
+    #     for item in self.valor_item:
+    #         self.soma = self.valor_item
+    #         self.valor_item_total += self.soma
+    #     return super(EstoqueItens, self).save(*args, **kwargs)
+
+
+def total_geral_item(*args, **kwargs):
+    total_geral = EstoqueItens.objects.values('valor_item').aggregate(Sum('valor_item'))
+    valor_item_total = total_geral.values()
+    return print(valor_item_total)
+    # self.total_geral = EstoqueItens.objects.annotate(valor_item_total=Sum('valor_item'))
+    # # self.total = EstoqueItens.objects.aggregate(Sum('valor_item')).values
+    # self.valor_item_total = self.total_geral[0].
+    # return print(super(EstoqueItens, self).save(*args, **kwargs))

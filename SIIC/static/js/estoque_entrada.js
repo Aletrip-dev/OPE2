@@ -52,6 +52,9 @@ $('#add-item').click(function(ev) {
     $('label[for="id_estoque-' + (count) + '-saldo"]').append('<input id="id_estoque-' + (count) + '-inicial" class="form-control" type="hidden" />')
         // Select2
     $('.clProduto').select2()
+
+
+
 });
 
 let estoque

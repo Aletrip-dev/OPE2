@@ -45,12 +45,11 @@
         .navbar {
             position: sticky !important;
             top: 0 !important;
-            t !important;
+            t:  !important;
         }
 
         #logo_small {
             position: absolute;
-
             max-width: 6%;
             height: auto;
             border-radius: 10px;
@@ -59,6 +58,11 @@
 
         img:hover {
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }
+
+        #linha_v {
+            height: 1rem;
+            border-left: 1px solid grey;
         }
     </style>
 
@@ -74,6 +78,9 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">SIIC</a>
         </div>
+
+        <hr id="linha_v" width="2" size="100" color="white">
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -104,7 +111,7 @@
                         <a class="dropdown-item" href="{% url 'cadastrar-cor' %}">Cadastro de cor</a>
                         <hr>
                         <a class="dropdown-item" href="{% url 'cadastrar-tamanho' %}">Cadastro de tamanho</a>
-                         <hr>
+                        <hr>
                         <a class="dropdown-item" href="{% url 'cadastrar-categoria' %}">Cadastro de categorias</a>
                     </div>
 
@@ -221,12 +228,13 @@
 
         {% if request.user.is_authenticated %}
         {% block rodape_nome %}
-        <div class="bg-secondary text-center container-fluid text-light">
-            Rodapé
-        </div>
+
         {% endblock rodape_nome %}
 
         {% block rodape %}
+        <div id="rodape" class="bg-secondary text-center container-fluid text-light">
+            Rodapé
+        </div>
         <footer class="footer fixed-botton">
             <div class="jumbotron jumbotron-fluid text-center jumbotron-fixed-botton">
                 <div class="jumbotron jumbotron-fluid">
