@@ -1,4 +1,3 @@
-from django.db.models.expressions import Value
 from django.db.models.fields import FloatField
 from usuarios.models import Usuario
 from django.db import models
@@ -8,10 +7,8 @@ from django.urls.base import reverse_lazy
 from django import forms
 from .manager import EstoqueEntradaManager, EstoqueSaidaManager
 from django.db.models import F, ExpressionWrapper, DecimalField, Max, Sum, Avg, Min
-from decimal import Decimal
 from django.db.models import Sum
 from django.db.models import FloatField
-from django.db.models import Q
 
 
 # Create your models here.
