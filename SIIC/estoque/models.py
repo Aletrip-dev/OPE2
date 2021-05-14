@@ -41,8 +41,7 @@ class Estoque(TimeStampedModel):
     nf = models.PositiveIntegerField(
         null=False, blank=False, verbose_name='Nota Fiscal')
     movimento = models.CharField(max_length=1, choices=MOVIMENTO)
-    valor_item_total = models.DecimalField(
-        max_digits=10, decimal_places=2, default=0)
+
 
     class Meta:
         ordering = ('-created',)
