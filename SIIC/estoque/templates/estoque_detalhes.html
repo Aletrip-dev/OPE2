@@ -12,7 +12,8 @@
     <div class="row">
         <div class="class col-sm-1"></div>
         <div class="col col-sm-10">
-            <a href="{% url url_list %}" class="btn btn-info"><i><i class="fa fa-arrow-left" aria-hidden="true"></i>  </i>{{botao_listas}}</a>
+            <a href="{% url url_list %}" class="btn btn-info"><i><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </i>{{botao_listas}}</a>
             <hr>
             <h1 style="margin-left: 50px; margin-top: 10px;" class="float-left">
                 {{object}}
@@ -61,12 +62,20 @@
                         <td align="center">R$: {{obj.preco_unit}}</td>
                         <td align="center">R$: {{obj.valor_item}}</td>
                     </tr>
-                    {% endfor %}
                 </tbody>
+                {% endfor %}
             </table>
-            <span id="total_geral" class="btn btn-danger">
-                <h3>Total R$: {{EstoqueItens.total_geral_item}}</h3>
-            </span>
+
+                    {% for obj in object.estoques.all %}
+
+                    <div>
+                    {% if forloop.last %}
+                    <span id="total_geral" class="btn btn-danger">
+                    <h3>Total R$: {{obj.calcula_total_geral}}</h3>
+                    </span>
+                    {% endif %}
+                    </div>
+                    {% endfor %}
         </div>
     </div>
 </container>

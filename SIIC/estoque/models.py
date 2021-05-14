@@ -1,4 +1,5 @@
 from django.db.models.expressions import Value
+from django.db.models.fields import FloatField
 from usuarios.models import Usuario
 from django.db import models
 from django.contrib.auth.models import User
@@ -9,6 +10,10 @@ from .manager import EstoqueEntradaManager, EstoqueSaidaManager
 from django.db.models import F, ExpressionWrapper, DecimalField, Max, Sum, Avg, Min
 from decimal import Decimal
 from django.db.models import Sum
+from django.db.models import FloatField
+from django.db.models import Q
+
+
 # Create your models here.
 
 # classe para obter data e hora da criação e modificação
@@ -36,6 +41,8 @@ class Estoque(TimeStampedModel):
     nf = models.PositiveIntegerField(
         null=False, blank=False, verbose_name='Nota Fiscal')
     movimento = models.CharField(max_length=1, choices=MOVIMENTO)
+    valor_item_total = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0)
 
     class Meta:
         ordering = ('-created',)
@@ -49,9 +56,6 @@ class Estoque(TimeStampedModel):
         if self.nf:
             return str(self.nf).zfill(6)
         return '---'
-
-
-# cria tabela virtual somente com as entradas
 
 
 class EstoqueEntrada(Estoque):
@@ -86,8 +90,6 @@ class EstoqueItens(models.Model):
         max_digits=9, decimal_places=2, blank=True, null=True, verbose_name='R$/Unid.')
     valor_item = models.DecimalField(
         max_digits=9, decimal_places=2, default=0)
-    valor_item_total = models.DecimalField(
-        max_digits=10, decimal_places=2, default=0)
 
     class Meta:
         ordering = ('pk',)
@@ -96,24 +98,17 @@ class EstoqueItens(models.Model):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
 
     # realiza o calcula do valor do item e atribui ao campo
+    @property
     def calcula_total(self, *args, **kwargs):
         self.total = round(self.preco_unit * self.quantidade, 2)
         self.valor_item = self.total
         return super(EstoqueItens, self).save(*args, **kwargs)
 
-    # def calcula_total_geral_item(self, *args, **kwargs):
-    #     self.soma = 0
-    #     for item in self.valor_item:
-    #         self.soma = self.valor_item
-    #         self.valor_item_total += self.soma
-    #     return super(EstoqueItens, self).save(*args, **kwargs)
-
-
-def total_geral_item(*args, **kwargs):
-    total_geral = EstoqueItens.objects.values('valor_item').aggregate(Sum('valor_item'))
-    valor_item_total = total_geral.values()
-    return print(valor_item_total)
-    # self.total_geral = EstoqueItens.objects.annotate(valor_item_total=Sum('valor_item'))
-    # # self.total = EstoqueItens.objects.aggregate(Sum('valor_item')).values
-    # self.valor_item_total = self.total_geral[0].
-    # return print(super(EstoqueItens, self).save(*args, **kwargs))
+    # Total geral
+    @property
+    def calcula_total_geral(self, *args, **kwargs):
+        self.tt = EstoqueItens.objects.filter(estoque=self.estoque).values(
+        ).aggregate(Sum('valor_item', output_field=FloatField()))
+        self.tt = list(self.tt.values())[0]
+        self.tt = round(self.tt, 2)
+        return str(self.tt)
