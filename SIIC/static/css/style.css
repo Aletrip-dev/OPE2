@@ -113,3 +113,7 @@ i {
     float: right;
     vertical-align: auto;
 }
+
+.control-label {
+    padding: 0.5rem;
+}
