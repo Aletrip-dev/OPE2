@@ -62,6 +62,9 @@ class Produto(models.Model):
             'estoque': self.quantidade_disponivel,
         }
 
+    def codigo_produto_formatado(self):
+        return str(self.pk).zfill(6)
+
 
 class Categoria(models.Model):
     categoria = models.CharField(

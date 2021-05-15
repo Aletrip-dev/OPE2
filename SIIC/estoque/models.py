@@ -39,7 +39,6 @@ class Estoque(TimeStampedModel):
         null=False, blank=False, verbose_name='Nota Fiscal')
     movimento = models.CharField(max_length=1, choices=MOVIMENTO)
 
-
     class Meta:
         ordering = ('-created',)
 
@@ -79,7 +78,7 @@ class EstoqueItens(models.Model):
     estoque = models.ForeignKey(
         Estoque, on_delete=models.CASCADE, related_name='estoques')
     produto = models.ForeignKey(
-        Produto, on_delete=models.CASCADE, verbose_name='Produto: ')
+        Produto, on_delete=models.SET_NULL, verbose_name='Produto: ', null=True)
     quantidade = models.PositiveIntegerField(verbose_name='Qtd.: ')
     saldo = models.PositiveIntegerField(verbose_name='Estoque: ')
     preco_unit = models.DecimalField(
