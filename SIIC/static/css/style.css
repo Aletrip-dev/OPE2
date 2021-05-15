@@ -117,3 +117,11 @@ i {
 .control-label {
     padding: 0.5rem;
 }
+
+.form-inline {
+    display: inline-block !important;
+}
+
+.asteriskField {
+    margin: 0.2rem;
+}

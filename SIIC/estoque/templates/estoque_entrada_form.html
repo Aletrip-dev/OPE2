@@ -47,11 +47,11 @@
                     {% for item_estoque_form in formset %}
                     <div class="inlineform">
                         <div id="item-{{ forloop.counter0 }}" class="form-group">
-                            {{ item_estoque_form.produto|bootstrap }}
-                            {{ item_estoque_form.quantidade|bootstrap }}
-                            {{ item_estoque_form.saldo|bootstrap }}
-                            {{ item_estoque_form.preco_unit|bootstrap }}
-                            <span id="apagar_item">{{ item_estoque_form.DELETE|bootstrap }} </span>
+                            {{ item_estoque_form.produto|as_crispy_field }}
+                            {{ item_estoque_form.quantidade|as_crispy_field }}
+                            {{ item_estoque_form.saldo|as_crispy_field }}
+                            {{ item_estoque_form.preco_unit|as_crispy_field }}
+                            <span id="apagar_item">{{ item_estoque_form.DELETE|as_crispy_field }} </span>
                         </div>
                     </div>
                     {% endfor %}
@@ -93,7 +93,7 @@
 <script src="{% static 'js/estoque_entrada.js' %}"></script>
 <script type="text/html" id="item-estoque">
     <div id="item-__prefix__" class="form-group">
-        {{ formset.empty_form|bootstrap }}
+        {{ formset.empty_form|crispy }}
     </div>
 </script>
 
