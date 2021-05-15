@@ -163,6 +163,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+#UPLOAD DE ARQUIVOSDE MIDIA
+MEDIA_URL = "/images/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 # DATABASE_CONNECTION_POOLING = False
 
 
